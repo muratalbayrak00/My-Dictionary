@@ -12,7 +12,6 @@ protocol SplashInteractorProtocol: AnyObject {
     func checkInternetConnection()
 }
 
-//Sonucu presenter a gönderir
 protocol SplashInteractorOutputProtocol: AnyObject {
     func internetConnection(status: Bool)
 }

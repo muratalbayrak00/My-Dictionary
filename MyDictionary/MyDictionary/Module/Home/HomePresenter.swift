@@ -35,6 +35,7 @@ extension HomePresenter: HomePresenterProtocol {
     
     func viewDidLoad() {
         view.setupTableView()
+        view.setupSearchController()
         view.setTitle("Search Word")
         getRecentWordsOutput()
     }
