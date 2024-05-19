@@ -13,6 +13,8 @@ protocol HomePresenterProtocol {
     func numberOfItems() -> Int
     func recentWords(_ index: Int) -> String?
     func didSelectRowAt(_ index: Int)
+    func topSearch()
+    func updateRecentWords(_ text: String)
 }
 
 final class HomePresenter {
@@ -33,10 +35,14 @@ final class HomePresenter {
 
 extension HomePresenter: HomePresenterProtocol {
     
+    func updateRecentWords(_ text: String) {
+        self.recentSearchs.append(text)
+    }
+    
     func viewDidLoad() {
         view.setupTableView()
-        view.setupSearchController()
         view.setTitle("Search Word")
+        view.setRecentLabel("Recent Search")
         getRecentWordsOutput()
     }
     
@@ -45,7 +51,7 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     func recentWords(_ index: Int) -> String? {
-        return recentWords(index) // TODO: Burayi gereksiz olabilir tekrar bak.
+        return recentSearchs[index] // TODO: Burayi gereksiz olabilir tekrar bak.
     }
     
     func didSelectRowAt(_ index: Int) {
@@ -56,10 +62,16 @@ extension HomePresenter: HomePresenterProtocol {
         
     }
     
-    private func getRecentSearchs() {
+    private func getRecentSearchs() -> [String] {
         // TODO: Show loading
-        interactor.getRecentSearchs()
+        return recentSearchs
+       // interactor.getRecentSearchs()
     }
+    
+    func topSearch() {
+        // fetch word here 
+    }
+    
     
 }
 

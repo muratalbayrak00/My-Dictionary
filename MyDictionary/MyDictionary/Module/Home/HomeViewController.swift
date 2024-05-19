@@ -2,7 +2,7 @@
 //  HomeViewController.swift
 //  MyDictionary
 //
-//  Created by murat albayrak on 18.05.2024.
+//  Created by murat albayrak on 19.05.2024.
 //
 
 import UIKit
@@ -11,31 +11,103 @@ protocol HomeViewControllerProtocol: AnyObject {
     func reloadData()
     func showLoadingView()
     func hideLoadingView()
-    func setupSearchController()
     func setupTableView()
     func showError(_ message: String)
     func setTitle(_ title: String)
+    func setRecentLabel(_ title: String)
 }
 
-final class HomeViewController: BaseViewController {
-
+final class HomeViewController: BaseViewController, UISearchBarDelegate {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBOutlet weak var tableView: UITableView!
     
-    let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint! // Button'un alt boşluğunun bir constraint'ı olmalı
+    
+    @IBOutlet weak var recentSearchLabel: UILabel!
     
     var presenter: HomePresenterProtocol!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         presenter.viewDidLoad()
-
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        searchBar.delegate = self
     }
-
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @IBAction func topSearch(_ sender: UIButton) {
+        
+        guard let searchText = searchBar.searchTextField.text else { return }
+        
+        if !searchText.isEmpty {
+            presenter.updateRecentWords(searchText)
+        }
+        reloadData()
+        presenter.topSearch()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("Text Did begin edit")
+        reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.searchTextField.text else { return }
+        
+        if !searchText.isEmpty {
+            presenter.updateRecentWords(searchText)
+        }
+        reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.searchTextField.text else { return }
+        
+        if !searchText.isEmpty {
+            presenter.updateRecentWords(searchText)
+        }
+        reloadData()
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            let keyboardHeight = keyboardSize.height
+            
+            buttonBottomConstraint.constant = keyboardHeight - 20
+            
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        
+        buttonBottomConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
 }
 
 extension HomeViewController: HomeViewControllerProtocol {
-
+    
     func reloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -50,19 +122,7 @@ extension HomeViewController: HomeViewControllerProtocol {
         hideLoading()
     }
     
-    func setupSearchController() {
-        searchController.searchBar.placeholder = "Search Word"
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = true
-        navigationItem.searchController = searchController
-        searchController.hidesNavigationBarDuringPresentation = false
-        definesPresentationContext = true
-    }
-    
-    
     func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
         tableView.register(cellType: RecentSearchCell.self)
     }
     
@@ -72,6 +132,10 @@ extension HomeViewController: HomeViewControllerProtocol {
     
     func setTitle(_ title: String) {
         self.title = title
+    }
+    
+    func setRecentLabel(_ title: String) {
+        self.recentSearchLabel.text = title
     }
     
 }
@@ -94,14 +158,15 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.numberOfItems()
+        print(presenter.numberOfItems())
+        return presenter.numberOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: RecentSearchCell.self, for: indexPath)
         
-        if let recentWords = presenter.recentWords(indexPath.row) {
-            cell.cellPresenter = RecentSearchCellPresenter(view: cell, recentWords: recentWords)
+        if let recentWord = presenter.recentWords(indexPath.row) {
+            cell.cellPresenter = RecentSearchCellPresenter(view: cell, recentWord: recentWord)
         }
         
         return cell

@@ -15,14 +15,14 @@ protocol RecentSearchCellPresenterProtocol: AnyObject {
 final class RecentSearchCellPresenter {
     
     weak var view: RecentSearchCellProtocol?
-    private let recentWords: String
+    private let recentWord: String
     
     init(
         view: RecentSearchCellProtocol? = nil,
-        recentWords: String
+        recentWord: String
     ) {
         self.view = view
-        self.recentWords = recentWords
+        self.recentWord = recentWord
     }
     
 }
@@ -30,8 +30,9 @@ final class RecentSearchCellPresenter {
 extension RecentSearchCellPresenter: RecentSearchCellPresenterProtocol {
     
     func load() {
-        view?.setSearchIcon(UIImage(systemName: "doc.text.magnifyingglass") ?? UIImage(named: "defaultIcon")! )
-        view?.setWordLabel(recentWords)
+        view?.setSearchIcon(UIImage(systemName: "magnifyingglass") ?? UIImage(named: "defaultIcon")! )
+        view?.setWordLabel(recentWord)
+        view?.setWordLabel(recentWord)
         view?.setArrowIcon(UIImage(systemName: "arrow.right") ?? UIImage(named: "defaultIcon")!)
     }
     

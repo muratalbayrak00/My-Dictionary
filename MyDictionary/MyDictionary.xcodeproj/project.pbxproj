@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D625049E2BFA85D500144A9E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D625049C2BFA85D500144A9E /* HomeViewController.swift */; };
+		D625049F2BFA85D500144A9E /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D625049D2BFA85D500144A9E /* HomeViewController.xib */; };
 		D6D4EA5E2BF802B300D1AE91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA5D2BF802B300D1AE91 /* AppDelegate.swift */; };
 		D6D4EA602BF802B300D1AE91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA5F2BF802B300D1AE91 /* SceneDelegate.swift */; };
 		D6D4EA622BF802B300D1AE91 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA612BF802B300D1AE91 /* SplashViewController.swift */; };
@@ -24,8 +26,6 @@
 		D6D4EAA52BF8E0C900D1AE91 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAA42BF8E0C900D1AE91 /* SplashPresenter.swift */; };
 		D6D4EAA72BF8E15200D1AE91 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAA62BF8E15200D1AE91 /* SplashRouter.swift */; };
 		D6D4EAAA2BF8E17700D1AE91 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAA92BF8E17700D1AE91 /* SplashInteractor.swift */; };
-		D6D4EAAF2BF93BFB00D1AE91 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAAD2BF93BFB00D1AE91 /* HomeViewController.swift */; };
-		D6D4EAB02BF93BFB00D1AE91 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D4EAAE2BF93BFB00D1AE91 /* HomeViewController.xib */; };
 		D6D4EAB22BF93C0B00D1AE91 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAB12BF93C0B00D1AE91 /* HomeInteractor.swift */; };
 		D6D4EAB42BF93C1700D1AE91 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAB32BF93C1600D1AE91 /* HomePresenter.swift */; };
 		D6D4EAB62BF93C2300D1AE91 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAB52BF93C2300D1AE91 /* HomeRouter.swift */; };
@@ -36,6 +36,11 @@
 		D6D4EAC22BF957E400D1AE91 /* RecentSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAC02BF957E400D1AE91 /* RecentSearchCell.swift */; };
 		D6D4EAC32BF957E400D1AE91 /* RecentSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D4EAC12BF957E400D1AE91 /* RecentSearchCell.xib */; };
 		D6D4EAC52BF9582200D1AE91 /* RecentSearchCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EAC42BF9582200D1AE91 /* RecentSearchCellPresenter.swift */; };
+		D6EEF5212BF96F850097E8D9 /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EEF51F2BF96F850097E8D9 /* WordDetailViewController.swift */; };
+		D6EEF5222BF96F850097E8D9 /* WordDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6EEF5202BF96F850097E8D9 /* WordDetailViewController.xib */; };
+		D6EEF5242BF96FBA0097E8D9 /* WordDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EEF5232BF96FB90097E8D9 /* WordDetailInteractor.swift */; };
+		D6EEF5262BF96FC90097E8D9 /* WordDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EEF5252BF96FC90097E8D9 /* WordDetailPresenter.swift */; };
+		D6EEF5282BF96FD40097E8D9 /* WordDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EEF5272BF96FD40097E8D9 /* WordDetailRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D625049C2BFA85D500144A9E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D625049D2BFA85D500144A9E /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		D6D4EA5A2BF802B300D1AE91 /* MyDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D4EA5D2BF802B300D1AE91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D4EA5F2BF802B300D1AE91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,8 +83,6 @@
 		D6D4EAA42BF8E0C900D1AE91 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		D6D4EAA62BF8E15200D1AE91 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		D6D4EAA92BF8E17700D1AE91 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
-		D6D4EAAD2BF93BFB00D1AE91 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		D6D4EAAE2BF93BFB00D1AE91 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		D6D4EAB12BF93C0B00D1AE91 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		D6D4EAB32BF93C1600D1AE91 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		D6D4EAB52BF93C2300D1AE91 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
@@ -88,6 +93,11 @@
 		D6D4EAC02BF957E400D1AE91 /* RecentSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCell.swift; sourceTree = "<group>"; };
 		D6D4EAC12BF957E400D1AE91 /* RecentSearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchCell.xib; sourceTree = "<group>"; };
 		D6D4EAC42BF9582200D1AE91 /* RecentSearchCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCellPresenter.swift; sourceTree = "<group>"; };
+		D6EEF51F2BF96F850097E8D9 /* WordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
+		D6EEF5202BF96F850097E8D9 /* WordDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailViewController.xib; sourceTree = "<group>"; };
+		D6EEF5232BF96FB90097E8D9 /* WordDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailInteractor.swift; sourceTree = "<group>"; };
+		D6EEF5252BF96FC90097E8D9 /* WordDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailPresenter.swift; sourceTree = "<group>"; };
+		D6EEF5272BF96FD40097E8D9 /* WordDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +208,7 @@
 		D6D4EA952BF80D0E00D1AE91 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				D6EEF51E2BF96F6E0097E8D9 /* WordDetails */,
 				D6D4EA9B2BF8DF5E00D1AE91 /* Base */,
 				D6D4EA962BF80D1A00D1AE91 /* Splash */,
 				D6D4EAAB2BF93BC600D1AE91 /* Home */,
@@ -245,8 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				D6D4EAAC2BF93BDB00D1AE91 /* Cell */,
-				D6D4EAAD2BF93BFB00D1AE91 /* HomeViewController.swift */,
-				D6D4EAAE2BF93BFB00D1AE91 /* HomeViewController.xib */,
+				D625049C2BFA85D500144A9E /* HomeViewController.swift */,
+				D625049D2BFA85D500144A9E /* HomeViewController.xib */,
 				D6D4EAB12BF93C0B00D1AE91 /* HomeInteractor.swift */,
 				D6D4EAB32BF93C1600D1AE91 /* HomePresenter.swift */,
 				D6D4EAB52BF93C2300D1AE91 /* HomeRouter.swift */,
@@ -272,6 +283,18 @@
 				D6D4EABE2BF9579D00D1AE91 /* Collection.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		D6EEF51E2BF96F6E0097E8D9 /* WordDetails */ = {
+			isa = PBXGroup;
+			children = (
+				D6EEF51F2BF96F850097E8D9 /* WordDetailViewController.swift */,
+				D6EEF5202BF96F850097E8D9 /* WordDetailViewController.xib */,
+				D6EEF5232BF96FB90097E8D9 /* WordDetailInteractor.swift */,
+				D6EEF5252BF96FC90097E8D9 /* WordDetailPresenter.swift */,
+				D6EEF5272BF96FD40097E8D9 /* WordDetailRouter.swift */,
+			);
+			path = WordDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,11 +405,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6D4EA6D2BF802B500D1AE91 /* LaunchScreen.storyboard in Resources */,
+				D6EEF5222BF96F850097E8D9 /* WordDetailViewController.xib in Resources */,
 				D6D4EA6A2BF802B500D1AE91 /* Assets.xcassets in Resources */,
 				D6D4EA652BF802B300D1AE91 /* Main.storyboard in Resources */,
 				D6D4EAB82BF94E6800D1AE91 /* SplashViewController.xib in Resources */,
+				D625049F2BFA85D500144A9E /* HomeViewController.xib in Resources */,
 				D6D4EAC32BF957E400D1AE91 /* RecentSearchCell.xib in Resources */,
-				D6D4EAB02BF93BFB00D1AE91 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,17 +438,21 @@
 				D6D4EAC22BF957E400D1AE91 /* RecentSearchCell.swift in Sources */,
 				D6D4EA9D2BF8DF6B00D1AE91 /* BaseViewController.swift in Sources */,
 				D6D4EABD2BF9578800D1AE91 /* ClassName.swift in Sources */,
+				D6EEF5282BF96FD40097E8D9 /* WordDetailRouter.swift in Sources */,
 				D6D4EABF2BF9579D00D1AE91 /* Collection.swift in Sources */,
 				D6D4EA622BF802B300D1AE91 /* SplashViewController.swift in Sources */,
+				D625049E2BFA85D500144A9E /* HomeViewController.swift in Sources */,
 				D6D4EABA2BF9551E00D1AE91 /* UITableView.swift in Sources */,
 				D6D4EA682BF802B300D1AE91 /* MyDictionary.xcdatamodeld in Sources */,
 				D6D4EAB22BF93C0B00D1AE91 /* HomeInteractor.swift in Sources */,
 				D6D4EAA52BF8E0C900D1AE91 /* SplashPresenter.swift in Sources */,
 				D6D4EAA02BF8DFAF00D1AE91 /* LoadingShowable.swift in Sources */,
 				D6D4EA5E2BF802B300D1AE91 /* AppDelegate.swift in Sources */,
+				D6EEF5212BF96F850097E8D9 /* WordDetailViewController.swift in Sources */,
 				D6D4EAC52BF9582200D1AE91 /* RecentSearchCellPresenter.swift in Sources */,
+				D6EEF5262BF96FC90097E8D9 /* WordDetailPresenter.swift in Sources */,
 				D6D4EAA32BF8DFDA00D1AE91 /* LoadingView.swift in Sources */,
-				D6D4EAAF2BF93BFB00D1AE91 /* HomeViewController.swift in Sources */,
+				D6EEF5242BF96FBA0097E8D9 /* WordDetailInteractor.swift in Sources */,
 				D6D4EAB62BF93C2300D1AE91 /* HomeRouter.swift in Sources */,
 				D6D4EAB42BF93C1700D1AE91 /* HomePresenter.swift in Sources */,
 				D6D4EAAA2BF8E17700D1AE91 /* SplashInteractor.swift in Sources */,

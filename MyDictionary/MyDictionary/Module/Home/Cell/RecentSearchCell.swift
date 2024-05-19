@@ -17,7 +17,7 @@ class RecentSearchCell: UITableViewCell {
 
     @IBOutlet weak var searchIcon: UIImageView!
     @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var arrowLabel: UIImageView!
+    @IBOutlet weak var arrowIcon: UIImageView!
     
     var cellPresenter: RecentSearchCellPresenterProtocol! {
         didSet{
@@ -44,7 +44,7 @@ extension RecentSearchCell: RecentSearchCellProtocol {
     }
     
     func setArrowIcon(_ image: UIImage) {
-        self.arrowLabel.image = image
+        self.arrowIcon.image = image
     }
     
 }
