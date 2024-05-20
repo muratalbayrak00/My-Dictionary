@@ -44,33 +44,50 @@
                     </connections>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rqX-qr-qJw">
-                    <rect key="frame" x="16" y="206" width="361" height="518"/>
+                    <rect key="frame" x="16" y="213" width="361" height="511"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="KFn-1u-Vqp"/>
                         <outlet property="delegate" destination="-1" id="H1B-uU-5ji"/>
                     </connections>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aay-YZ-xSG">
-                    <rect key="frame" x="16" y="175" width="361" height="23"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fit-ek-3z2">
+                    <rect key="frame" x="16" y="169" width="361" height="28"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aay-YZ-xSG">
+                            <rect key="frame" x="0.0" y="0.0" width="333" height="28"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Br9-70-YYl">
+                            <rect key="frame" x="333" y="0.0" width="28" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="28" id="1NH-HD-bze"/>
+                                <constraint firstAttribute="height" constant="28" id="ncI-KZ-0kp"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                            <connections>
+                                <action selector="clearRecentSearch:" destination="-1" eventType="touchUpInside" id="1NM-p6-zNy"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Aay-YZ-xSG" firstAttribute="top" secondItem="8XX-l5-Vsa" secondAttribute="bottom" constant="16" id="Fz8-xr-K1s"/>
                 <constraint firstItem="iN9-rZ-ZbM" firstAttribute="top" secondItem="rqX-qr-qJw" secondAttribute="bottom" constant="4" id="H1C-0d-DPH"/>
-                <constraint firstItem="rqX-qr-qJw" firstAttribute="top" secondItem="Aay-YZ-xSG" secondAttribute="bottom" constant="8" id="UBS-q5-CYP"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Aay-YZ-xSG" secondAttribute="trailing" constant="16" id="VBC-jC-7gk"/>
+                <constraint firstItem="rqX-qr-qJw" firstAttribute="top" secondItem="Fit-ek-3z2" secondAttribute="bottom" constant="16" id="VjN-8a-1aj"/>
                 <constraint firstItem="iN9-rZ-ZbM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Xsu-pb-t03"/>
                 <constraint firstItem="8XX-l5-Vsa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="b2g-4e-jX4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iN9-rZ-ZbM" secondAttribute="trailing" constant="16" id="dDa-AU-SUi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rqX-qr-qJw" secondAttribute="trailing" constant="16" id="hdr-tW-V7P"/>
                 <constraint firstAttribute="trailing" secondItem="8XX-l5-Vsa" secondAttribute="trailing" constant="8" id="j1F-fe-lEb"/>
                 <constraint firstItem="8XX-l5-Vsa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="j9D-TZ-lh3"/>
-                <constraint firstItem="Aay-YZ-xSG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="sGs-BS-XRd"/>
+                <constraint firstItem="Fit-ek-3z2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="kod-qV-1hu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fit-ek-3z2" secondAttribute="trailing" constant="16" id="txU-xX-HfA"/>
+                <constraint firstItem="Fit-ek-3z2" firstAttribute="top" secondItem="8XX-l5-Vsa" secondAttribute="bottom" constant="10" id="uDd-Hf-HVc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="iN9-rZ-ZbM" secondAttribute="bottom" constant="45" id="xG1-9P-max"/>
                 <constraint firstItem="rqX-qr-qJw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="yLT-9E-ulg"/>
             </constraints>
@@ -78,6 +95,7 @@
         </view>
     </objects>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

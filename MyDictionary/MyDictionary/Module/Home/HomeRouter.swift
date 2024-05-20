@@ -10,7 +10,7 @@ import DictionaryApi
 
 enum HomeRoutes {
    // case details(source: WordsData?)// TODO: burada string yerine RecentWords olabilir
-    case details// TODO: burada string yerine RecentWords olabilir
+    case details(searchText: String)// TODO: burada string yerine RecentWords olabilir
 }
 
 protocol HomeRouterProtocol {
@@ -39,9 +39,10 @@ extension HomeRouter: HomeRouterProtocol {
     // TODO: Detay sayfasini yap
     func navigate(_ route: HomeRoutes) {
         switch route {
-        case .details:
+        case .details(let text):
             let detailsVC = WordDetailRouter.createModule()
-       //     detailsVC.source = source
+            detailsVC.searchText = text
+            word = text
             viewController?.navigationController?.pushViewController(detailsVC, animated: true)
         }
     }

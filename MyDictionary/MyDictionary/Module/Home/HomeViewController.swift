@@ -27,6 +27,12 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
     
     @IBOutlet weak var recentSearchLabel: UILabel!
     
+    
+    @IBAction func clearRecentSearch(_ sender: Any) {
+        presenter.clearRecentSearchs()
+        reloadData()
+    }
+    
     var presenter: HomePresenterProtocol!
     
     override func viewDidLoad() {
@@ -55,14 +61,12 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
-        
-        
+    
         reloadData()
-        presenter.topSearch()
+        presenter.topSearch(searchText)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("Text Did begin edit")
         reloadData()
     }
     
@@ -150,17 +154,9 @@ extension HomeViewController: UISearchResultsUpdating {
     
 }
 
-extension HomeViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.didSelectRowAt(indexPath.row)
-    }
-}
-
-extension HomeViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(presenter.numberOfItems())
         return presenter.numberOfItems()
     }
     

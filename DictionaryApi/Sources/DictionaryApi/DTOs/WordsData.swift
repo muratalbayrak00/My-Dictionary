@@ -13,6 +13,10 @@ public struct WordsData: Decodable {
     public let meanings: [Meaning]
     public let license: License
     public let sourceUrls: [String]
+    
+    public var totalDefinitionsCount: Int {
+        return meanings.reduce(0) { $0 + $1.definitions.count }
+    }
 }
 
 public struct License: Decodable {

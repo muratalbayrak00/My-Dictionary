@@ -60,11 +60,11 @@ extension NetworkManager: NetworkService {
                     completion(.success(responseObj))
                 } catch {
                     // JSON parsing hatasını yazdır
-                    print("JSON parsing error: \(error.localizedDescription)")
+                   // print("JSON parsing error: \(error.localizedDescription)")
                     
                     // JSON verisini yazdır
                     if let jsonString = String(data: data, encoding: .utf8) {
-                        print("Received JSON: \(jsonString)")
+                    //    print("Received JSON: \(jsonString)")
                     }
                     
                     completion(.failure(.jsonDecodedError))

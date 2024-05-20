@@ -10,7 +10,7 @@ import Foundation
 // https://api.dictionaryapi.dev/api/v2/entries/en/blue
 // https://api.dictionaryapi.dev/media/pronunciations/en/blue-au.mp3
 
-public var word: String = "green"
+public var word: String = ""
 
 enum RequestMethod: String {
     case get = "GET"
@@ -41,8 +41,6 @@ public class API {
     
     // https://api.dictionaryapi.dev/api/v2/entries/en/blue
     var baseURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
-    
-
     
     private var service: NetworkService
     

@@ -12,9 +12,9 @@ protocol HomePresenterProtocol {
     func viewDidLoad()
     func numberOfItems() -> Int
     func recentWords(_ index: Int) -> String?
-    func didSelectRowAt(_ index: Int)
-    func topSearch()
+    func topSearch(_ searchText: String)
     func updateRecentWords(_ text: String)
+    func clearRecentSearchs()
 }
 
 final class HomePresenter {
@@ -25,6 +25,7 @@ final class HomePresenter {
     
     private var recentSearchs: [String] = []
     
+    
     init(view: HomeViewControllerProtocol, router: HomeRouterProtocol, interactor: HomeInteractorProtocol) {
         self.view = view
         self.router = router
@@ -34,9 +35,13 @@ final class HomePresenter {
 }
 
 extension HomePresenter: HomePresenterProtocol {
-    
+
     func updateRecentWords(_ text: String) {
-        self.recentSearchs.append(text)
+        if !recentSearchs.contains(text){
+            self.recentSearchs.append(text)
+            
+            UserDefaults.standard.set(recentSearchs, forKey: "RecentSearches")
+        }
     }
     
     func viewDidLoad() {
@@ -44,6 +49,7 @@ extension HomePresenter: HomePresenterProtocol {
         view.setTitle("Search Word")
         view.setRecentLabel("Recent Search")
         getRecentWordsOutput()
+        setRecentSearchs()
     }
     
     func numberOfItems() -> Int {
@@ -54,22 +60,26 @@ extension HomePresenter: HomePresenterProtocol {
         return recentSearchs[index] // TODO: Burayi gereksiz olabilir tekrar bak.
     }
     
-    func didSelectRowAt(_ index: Int) {
-        print("Selected: \(recentSearchs[index] )")
-        // TODO: Burada secilen cell e gore detail sayfasina yonlendirme yap.
-//        guard let source = recentSearchs(index) else { return }
-//        router.navigate(.detail(source: source))
-        
-    }
-    
     private func getRecentSearchs() -> [String] {
         // TODO: Show loading
-        return recentSearchs
+        return self.recentSearchs
        // interactor.getRecentSearchs()
     }
     
-    func topSearch() {
-        router.navigate(.details)
+    func topSearch(_ searchText: String) {
+        router.navigate(.details(searchText: searchText))
+    }
+    
+    func setRecentSearchs() {
+        if let savedRecentSearchs = UserDefaults.standard.array(forKey: "RecentSearchs") as? [String] {
+            self.recentSearchs = savedRecentSearchs
+        }
+    }
+    
+    func clearRecentSearchs() {
+        UserDefaults.standard.removeObject(forKey: "RecentSearchs")
+        self.recentSearchs = []
+        // TODO: ReloadTableView gerekli
     }
     
     
