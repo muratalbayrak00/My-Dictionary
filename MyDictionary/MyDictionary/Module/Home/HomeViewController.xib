@@ -28,7 +28,7 @@
                         <constraint firstAttribute="height" constant="45" id="FpK-4e-opB"/>
                     </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Search"/>
                     <connections>
                         <action selector="topSearch:" destination="-1" eventType="touchUpInside" id="zdG-5g-cn6"/>
                     </connections>

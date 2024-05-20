@@ -7,13 +7,15 @@
 
 import Foundation
 
-protocol WordsServiceProtocol {
-    func fetchWords(completion: @escaping(Result<WordsData, NetworkError>) -> Void)
+//public var wordService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
+
+public protocol WordsServiceProtocol {
+    func fetchWords(completion: @escaping(Result<[WordsData], NetworkError>) -> Void)
 }
 
 extension API: WordsServiceProtocol {
     
-    func fetchWords(completion: @escaping (Result<WordsData, NetworkError>) -> Void) {
+    public func fetchWords(completion: @escaping (Result<[WordsData], NetworkError>) -> Void) {
         exequteRequestFor(router: .word, completion: completion)
     }
 }

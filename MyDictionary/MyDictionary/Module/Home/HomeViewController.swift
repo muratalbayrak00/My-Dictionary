@@ -55,6 +55,8 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
+        
+        
         reloadData()
         presenter.topSearch()
     }

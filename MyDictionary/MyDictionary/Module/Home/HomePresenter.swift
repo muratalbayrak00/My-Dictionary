@@ -69,7 +69,7 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     func topSearch() {
-        // fetch word here 
+        router.navigate(.details)
     }
     
     

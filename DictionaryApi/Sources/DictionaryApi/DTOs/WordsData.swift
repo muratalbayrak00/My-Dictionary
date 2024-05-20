@@ -7,35 +7,35 @@
 
 import Foundation
 
-public struct WordsData: Codable {
-    let word, phonetic: String
-    let phonetics: [Phonetic]
-    let meanings: [Meaning]
-    let license: License
-    let sourceUrls: [String]
+public struct WordsData: Decodable {
+    public let word, phonetic: String
+    public let phonetics: [Phonetic]
+    public let meanings: [Meaning]
+    public let license: License
+    public let sourceUrls: [String]
 }
 
-struct License: Codable {
-    let name: String
-    let url: String
+public struct License: Decodable {
+    public let name: String
+    public let url: String
 }
 
-struct Meaning: Codable {
-    let partOfSpeech: String
-    let definitions: [Definition]
-    let synonyms, antonyms: [String]
+public struct Meaning: Decodable {
+    public let partOfSpeech: String
+    public let definitions: [Definition]
+    public let synonyms, antonyms: [String]
 }
 
-struct Definition: Codable {
-    let definition: String
-    let example: String?
+public struct Definition: Decodable {
+    public let definition: String
+    public let example: String?
 }
 
-struct Phonetic: Codable {
-    let text: String
-    let audio: String
-    let sourceURL: String?
-    let license: License?
+public struct Phonetic: Decodable {
+    public let text: String
+    public let audio: String
+    public let sourceURL: String?
+    public let license: License?
 
     enum CodingKeys: String, CodingKey {
         case text, audio

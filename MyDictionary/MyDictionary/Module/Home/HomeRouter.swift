@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import DictionaryApi
 
 enum HomeRoutes {
-    case details(source: String)// TODO: burada string yerine RecentWords olabilir
+   // case details(source: WordsData?)// TODO: burada string yerine RecentWords olabilir
+    case details// TODO: burada string yerine RecentWords olabilir
 }
 
 protocol HomeRouterProtocol {
@@ -16,7 +18,9 @@ protocol HomeRouterProtocol {
 }
 
 final class HomeRouter {
+    
     weak var viewController: HomeViewController?
+    
     
     static func createModule() -> HomeViewController {
         let view = HomeViewController()
@@ -34,12 +38,12 @@ final class HomeRouter {
 extension HomeRouter: HomeRouterProtocol {
     // TODO: Detay sayfasini yap
     func navigate(_ route: HomeRoutes) {
-//        switch route {
-//        case .details(let source):
-//            let detailsVC = DetailRouter.createModule()
-//            detailsVC.source = source
-//            viewController?.navigationController?.pushViewController(detailsVC, animated: true)
-//        }
+        switch route {
+        case .details:
+            let detailsVC = WordDetailRouter.createModule()
+       //     detailsVC.source = source
+            viewController?.navigationController?.pushViewController(detailsVC, animated: true)
+        }
     }
     
 }

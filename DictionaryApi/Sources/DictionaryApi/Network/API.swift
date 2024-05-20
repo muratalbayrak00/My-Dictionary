@@ -10,6 +10,7 @@ import Foundation
 // https://api.dictionaryapi.dev/api/v2/entries/en/blue
 // https://api.dictionaryapi.dev/media/pronunciations/en/blue-au.mp3
 
+public var word: String = "green"
 
 enum RequestMethod: String {
     case get = "GET"
@@ -38,11 +39,15 @@ public class API {
         return instance
     }()
     
-    var baseURL = "https://api.dictionaryapi.dev/"
+    // https://api.dictionaryapi.dev/api/v2/entries/en/blue
+    var baseURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
+    
+
     
     private var service: NetworkService
     
-    init(service: NetworkService = NetworkManager()) {
+    public init(service: NetworkService = NetworkManager()) {
+
         self.service = service
     }
     
@@ -81,7 +86,8 @@ extension API {
         headers: [String: String]? = nil,
         method: RequestMethod = .get
     ) -> URLRequest? {
-        let urlString = baseURL + router.path // TODO: burayi duzelt
+        let urlString = baseURL + word // TODO: burayi duzelt
+        print("Url String ->  \(urlString)")
         guard let url = URL(string: urlString) else { return nil }
         
         var request = URLRequest(url: url)

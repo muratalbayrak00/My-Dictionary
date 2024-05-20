@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     
     case invalidRequest
     case requestFailed
@@ -28,24 +28,24 @@ enum NetworkError: Error {
     }
 }
 
-protocol NetworkService {
+public protocol NetworkService {
     func execute<T: Decodable>(
         urlRequest: URLRequest,
         completion: @escaping(Result<T, NetworkError>) -> Void
     )
 }
 
-final class NetworkManager {
+public class NetworkManager {
     private let session: URLSession
     
-    init(session: URLSession = URLSession(configuration: .default)) {
+    public init(session: URLSession = URLSession(configuration: .default)) {
         self.session = session
     }
 }
 
 extension NetworkManager: NetworkService {
     
-    func execute<T: Decodable>(
+    public func execute<T: Decodable>(
         urlRequest: URLRequest,
         completion: @escaping (Result<T, NetworkError>) -> Void
     ) {
@@ -59,6 +59,15 @@ extension NetworkManager: NetworkService {
                     let responseObj = try JSONDecoder().decode(T.self, from: data)
                     completion(.success(responseObj))
                 } catch {
+                    // JSON parsing hatasını yazdır
+                    print("JSON parsing error: \(error.localizedDescription)")
+                    
+                    // JSON verisini yazdır
+                    if let jsonString = String(data: data, encoding: .utf8) {
+                        print("Received JSON: \(jsonString)")
+                    }
+                    
+                    completion(.failure(.jsonDecodedError))
                     completion(.failure(.requestFailed))
                 }
             } else {
@@ -66,6 +75,7 @@ extension NetworkManager: NetworkService {
             }
             
         }
+        
         task.resume()
     }
 }
