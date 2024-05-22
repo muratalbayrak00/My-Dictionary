@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="MyDictionary" customModuleProvider="target">
             <connections>
                 <outlet property="buttonBottomConstraint" destination="xG1-9P-max" id="5o4-5J-2yv"/>
+                <outlet property="clearButton" destination="Br9-70-YYl" id="55z-P6-tz8"/>
                 <outlet property="recentSearchLabel" destination="Aay-YZ-xSG" id="zk1-zd-4zv"/>
                 <outlet property="searchBar" destination="8XX-l5-Vsa" id="xOA-YI-9ge"/>
                 <outlet property="tableView" destination="rqX-qr-qJw" id="dJi-ek-g5O"/>

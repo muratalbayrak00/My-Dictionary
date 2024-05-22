@@ -37,10 +37,17 @@ final class HomePresenter {
 extension HomePresenter: HomePresenterProtocol {
 
     func updateRecentWords(_ text: String) {
-        if !recentSearchs.contains(text){
-            self.recentSearchs.append(text)
+        view.showClearButton()
+        if !recentSearchs.contains(text.lowercased()){
+            if recentSearchs.count < 5 {
+                recentSearchs.insert(text.lowercased(), at: 0)
+
+            } else {
+                recentSearchs = Array(recentSearchs.dropLast())
+                recentSearchs.insert(text.lowercased(), at: 0)
+            }
             
-            UserDefaults.standard.set(recentSearchs, forKey: "RecentSearches")
+            UserDefaults.standard.set(recentSearchs, forKey: "RecentSearchs")
         }
     }
     
@@ -48,8 +55,10 @@ extension HomePresenter: HomePresenterProtocol {
         view.setupTableView()
         view.setTitle("Search Word")
         view.setRecentLabel("Recent Search")
-        getRecentWordsOutput()
+        print(self.recentSearchs)
         setRecentSearchs()
+        getRecentWordsOutput()
+        setClearButtonVisibility()
     }
     
     func numberOfItems() -> Int {
@@ -73,13 +82,26 @@ extension HomePresenter: HomePresenterProtocol {
     func setRecentSearchs() {
         if let savedRecentSearchs = UserDefaults.standard.array(forKey: "RecentSearchs") as? [String] {
             self.recentSearchs = savedRecentSearchs
+            print("fdsa")
+            print(savedRecentSearchs)
+            print("fjdkaskfd")
+            print(self.recentSearchs)
         }
     }
     
     func clearRecentSearchs() {
         UserDefaults.standard.removeObject(forKey: "RecentSearchs")
         self.recentSearchs = []
-        // TODO: ReloadTableView gerekli
+        view.hideClearButton()
+    }
+    
+    func setClearButtonVisibility() {
+        
+        if recentSearchs.isEmpty {
+            view.hideClearButton()
+        } else {
+            view.showClearButton()
+        }
     }
     
     

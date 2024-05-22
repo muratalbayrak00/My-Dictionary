@@ -15,6 +15,8 @@ protocol HomeViewControllerProtocol: AnyObject {
     func showError(_ message: String)
     func setTitle(_ title: String)
     func setRecentLabel(_ title: String)
+    func hideClearButton()
+    func showClearButton()
 }
 
 final class HomeViewController: BaseViewController, UISearchBarDelegate {
@@ -27,6 +29,7 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
     
     @IBOutlet weak var recentSearchLabel: UILabel!
     
+    @IBOutlet weak var clearButton: UIButton!
     
     @IBAction func clearRecentSearch(_ sender: Any) {
         presenter.clearRecentSearchs()
@@ -61,7 +64,9 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
-    
+        // When click the searh button, clear search bar text.
+        searchBar.searchTextField.text?.removeAll()
+        
         reloadData()
         presenter.topSearch(searchText)
     }
@@ -76,6 +81,7 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
+        // When click the searh button, clear search bar text.
         reloadData()
     }
     
@@ -85,6 +91,8 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
+        // When click the searh button, clear search bar text.
+        searchBar.searchTextField.text?.removeAll()
         reloadData()
     }
     
@@ -142,6 +150,14 @@ extension HomeViewController: HomeViewControllerProtocol {
     
     func setRecentLabel(_ title: String) {
         self.recentSearchLabel.text = title
+    }
+    
+    func hideClearButton() {
+        clearButton.isHidden = true
+    }
+    
+    func showClearButton() {
+        clearButton.isHidden = false
     }
     
 }

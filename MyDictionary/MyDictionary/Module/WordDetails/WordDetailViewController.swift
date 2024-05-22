@@ -44,7 +44,7 @@ extension WordDetailViewController: WordDetailViewControllerProtocol {
     }
     
     func setWordTitle(_ text: String) {
-        var capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
+        let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         wordTitleLabel.text = capitalizedText
     }
     

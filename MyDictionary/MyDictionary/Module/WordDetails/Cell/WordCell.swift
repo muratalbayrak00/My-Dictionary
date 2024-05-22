@@ -40,22 +40,22 @@ class WordCell: UITableViewCell {
 extension WordCell: WordCellProtocol {
     
     func setWordType(_ text: String) {
-        var capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
+        let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.wordTypeLabel.text = capitalizedText
     }
     
     func setWordMeaning(_ text: String) {
-        var capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
+        let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.wordMeaningLabel.text = capitalizedText
     }
     
     func setExampleLabel(_ text: String) {
-        var capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
+        let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.exampleTextLabel.text = capitalizedText
     }
     
     func setExampleSentence(_ text: String) {
-        var capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
+        let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.exampleSentenceLabel.text = capitalizedText
     }
     
