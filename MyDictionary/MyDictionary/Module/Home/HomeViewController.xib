@@ -31,7 +31,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="filled" title="Search"/>
                     <connections>
-                        <action selector="topSearch:" destination="-1" eventType="touchUpInside" id="zdG-5g-cn6"/>
+                        <action selector="topSearchButton:" destination="-1" eventType="touchUpInside" id="dW4-gu-lxk"/>
                     </connections>
                 </button>
                 <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Search Word" translatesAutoresizingMaskIntoConstraints="NO" id="8XX-l5-Vsa">

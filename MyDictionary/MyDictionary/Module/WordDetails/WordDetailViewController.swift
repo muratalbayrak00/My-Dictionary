@@ -26,15 +26,20 @@ class WordDetailViewController: BaseViewController{
     var source: WordsData?
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(cellType: WordCell.self)
         presenter.viewDidLoad()
+        tableView.register(cellType: WordCell.self)
+        
     }
     
-
+    @IBAction func playAudioButton(_ sender: Any) {
+        presenter.playAudio()
+    }
+    
 }
 
 extension WordDetailViewController: WordDetailViewControllerProtocol {

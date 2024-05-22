@@ -57,18 +57,19 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         view.endEditing(true)
     }
     
-    @IBAction func topSearch(_ sender: UIButton) {
+    @IBAction func topSearchButton(_ sender: UIButton) {
         
         guard let searchText = searchBar.searchTextField.text else { return }
         
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
-        // When click the searh button, clear search bar text.
+        presenter.topSearchButton(searchText)
+        // When click the search button, clear search bar text.
         searchBar.searchTextField.text?.removeAll()
         
         reloadData()
-        presenter.topSearch(searchText)
+        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -81,7 +82,6 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
-        // When click the searh button, clear search bar text.
         reloadData()
     }
     
@@ -91,8 +91,11 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
+        presenter.topSearchButton(searchText)
         // When click the searh button, clear search bar text.
         searchBar.searchTextField.text?.removeAll()
+
+        
         reloadData()
     }
     

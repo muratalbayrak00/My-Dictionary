@@ -54,6 +54,9 @@
                                     <buttonConfiguration key="configuration" style="tinted" cornerStyle="capsule">
                                         <imageReference key="image" image="person.wave.2.fill" catalog="system" symbolScale="large"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="playAudioButton:" destination="-1" eventType="touchUpInside" id="9BW-hl-EuD"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>

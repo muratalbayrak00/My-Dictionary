@@ -12,7 +12,7 @@ protocol HomePresenterProtocol {
     func viewDidLoad()
     func numberOfItems() -> Int
     func recentWords(_ index: Int) -> String?
-    func topSearch(_ searchText: String)
+    func topSearchButton(_ searchText: String)
     func updateRecentWords(_ text: String)
     func clearRecentSearchs()
 }
@@ -75,7 +75,7 @@ extension HomePresenter: HomePresenterProtocol {
        // interactor.getRecentSearchs()
     }
     
-    func topSearch(_ searchText: String) {
+    func topSearchButton(_ searchText: String) {
         router.navigate(.details(searchText: searchText))
     }
     

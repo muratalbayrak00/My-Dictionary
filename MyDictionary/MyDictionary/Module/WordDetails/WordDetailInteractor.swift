@@ -33,6 +33,7 @@ extension WordDetailInteractor: WordDetailInteractorProtocol {
     func fetchWord() {
         wordService.fetchWords { [weak self] result in
             guard let self else { return }
+            print("murat deneme ))))))))))))))))))))))")
             self.output?.fetchWordOutput(result: result)
         }
     }
