@@ -21,7 +21,7 @@ protocol WordDetailViewControllerProtocol: AnyObject {
 }
 
 class WordDetailViewController: BaseViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var wordTitleLabel: UILabel!
@@ -49,6 +49,8 @@ class WordDetailViewController: BaseViewController {
         presenter.viewDidLoad()
         
         cancelFilterButton.isHidden = false
+        //let footerCellNib = UINib(nibName: "FooterCell", bundle: nil)
+        //tableView.register(footerCellNib, forCellReuseIdentifier: "FooterCell")
         
     }
     
@@ -76,7 +78,7 @@ class WordDetailViewController: BaseViewController {
                 presenter.updatedIsFiltering()
             }
         }
-
+        
     }
     
     @IBAction func verbFilterButton(_ sender: Any) {
@@ -100,7 +102,7 @@ class WordDetailViewController: BaseViewController {
     }
     
     @IBAction func adjectiveFilterButton(_ sender: Any) {
-
+        
         if adjectiveFilterButton.isSelected {
             adjectiveFilterButton.isSelected = false
             
@@ -119,7 +121,7 @@ class WordDetailViewController: BaseViewController {
                 presenter.updatedIsFiltering()
             }
         }
-
+        
     }
     
     @IBAction func adverbFilterButton(_ sender: Any) {
@@ -153,7 +155,7 @@ class WordDetailViewController: BaseViewController {
 }
 
 extension WordDetailViewController: WordDetailViewControllerProtocol {
-
+    
     func setTableViewHeight() {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = 150
@@ -180,6 +182,7 @@ extension WordDetailViewController: WordDetailViewControllerProtocol {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(cellType: WordCell.self)
+        self.tableView.register(cellType: FooterCell.self)
     }
     
     func reloadData() {
@@ -213,33 +216,97 @@ extension WordDetailViewController: WordDetailViewControllerProtocol {
     func getSelectedFilter() -> [String] {
         return self.selectedFilterButtons
     }
-
+    
 }
 
 extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1// Tablonuzun tek bir bölümü olacak şekilde sadece 1 döndürün
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if presenter.getIsFiltering() {
             //print("getFilteredMeanings Count\(presenter.getFilteredMeanings().count)")
-            return presenter.getFilteredMeanings().count
+            return presenter.getFilteredMeanings().count+1
         }
-        return presenter.numberOfItems()
+        return presenter.numberOfItems()+1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
-        
-        if presenter.getIsFiltering() {
-            if let filteredWord = presenter.filteredMeanings(indexPath.row) {
-                cell.cellPresenter = WordCellPresenter(view: cell, word: filteredWord)
+        let cell: UITableViewCell
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            // Son hücre
+            let footerCell = tableView.dequeueCell(with: FooterCell.self, for: indexPath)
+            if let synonyms = presenter.getSynonyms() {
+                footerCell.footerCellPresenter = FooterCellPresenter(view: footerCell, sysnonyms: synonyms)
             }
+            cell = footerCell
+            
         } else {
-            if let word = presenter.newWord(indexPath.row) {
-                cell.cellPresenter = WordCellPresenter(view: cell, word: word)
+            // Diğer hücreler
+            let wordCell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
+            if presenter.getIsFiltering() {
+                if let filteredWord = presenter.filteredMeanings(indexPath.row) {
+                    wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord)
+                }
+            } else {
+                if let word = presenter.newWord(indexPath.row) {
+                    wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word)
+                }
             }
+            cell = wordCell
+            
         }
         
         return cell
+        
+        //        let cell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
+        //
+        //        if presenter.getIsFiltering() {
+        //            if let filteredWord = presenter.filteredMeanings(indexPath.row) {
+        //                cell.cellPresenter = WordCellPresenter(view: cell, word: filteredWord)
+        //            }
+        //        } else {
+        //            if let word = presenter.newWord(indexPath.row) {
+        //                cell.cellPresenter = WordCellPresenter(view: cell, word: word)
+        //            }
+        //        }
+        //
+        //        return cell
     }
     
+    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    
+    //        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+    //            // Son hücreye ulaşıldığında
+    //            if let footerCell = cell as? FooterCell {
+    //                // Eğer hücre bir FooterCell ise
+    //                if let synonyms = presenter.getSynonyms() {
+    //                    // FooterCell'in içeriğini ayarlayın
+    //                    footerCell.footerCellPresenter = FooterCellPresenter(view: footerCell, sysnonyms: synonyms)
+    //                }
+    //            }
+    //        }
+    //        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+    //            // Son hücreye ulaşıldığında
+    //            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FooterCell") as? FooterCell
+    //            if let synonyms = presenter.getSynonyms() {
+    //                // FooterCell'in içeriğini ayarlayın
+    //                footerView?.footerCellPresenter = FooterCellPresenter(view: footerView, sysnonyms: synonyms)
+    //                tableView.tableFooterView = footerView
+    //            }
+    //        }
+    // }
+    
 }
+
+
+//        let lastRowIndex = tableView.numberOfRows(inSection: indexPath.section) - 1
+//        if indexPath.row == lastRowIndex {
+//            let cell = tableView.dequeueCell(with: FooterCell.self, for: indexPath)
+//            print("********************************")
+//            if let synonyms = presenter.getSynonyms() {
+//                cell.footerCellPresenter = FooterCellPresenter(view: cell, sysnonyms: synonyms)
+//            }
+//        }

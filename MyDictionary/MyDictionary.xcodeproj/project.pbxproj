@@ -10,6 +10,9 @@
 		D625049E2BFA85D500144A9E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D625049C2BFA85D500144A9E /* HomeViewController.swift */; };
 		D625049F2BFA85D500144A9E /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D625049D2BFA85D500144A9E /* HomeViewController.xib */; };
 		D6B9BE1A2BFED822002E032C /* NewWordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B9BE192BFED822002E032C /* NewWordData.swift */; };
+		D6B9BE242BFFF745002E032C /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B9BE222BFFF745002E032C /* FooterCell.swift */; };
+		D6B9BE252BFFF745002E032C /* FooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6B9BE232BFFF745002E032C /* FooterCell.xib */; };
+		D6B9BE272BFFFC27002E032C /* FooterCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B9BE262BFFFC27002E032C /* FooterCellPresenter.swift */; };
 		D6D4EA5E2BF802B300D1AE91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA5D2BF802B300D1AE91 /* AppDelegate.swift */; };
 		D6D4EA602BF802B300D1AE91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA5F2BF802B300D1AE91 /* SceneDelegate.swift */; };
 		D6D4EA622BF802B300D1AE91 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA612BF802B300D1AE91 /* SplashViewController.swift */; };
@@ -68,6 +71,9 @@
 		D625049C2BFA85D500144A9E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D625049D2BFA85D500144A9E /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		D6B9BE192BFED822002E032C /* NewWordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWordData.swift; sourceTree = "<group>"; };
+		D6B9BE222BFFF745002E032C /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
+		D6B9BE232BFFF745002E032C /* FooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCell.xib; sourceTree = "<group>"; };
+		D6B9BE262BFFFC27002E032C /* FooterCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCellPresenter.swift; sourceTree = "<group>"; };
 		D6D4EA5A2BF802B300D1AE91 /* MyDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D4EA5D2BF802B300D1AE91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D4EA5F2BF802B300D1AE91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +146,13 @@
 				D6B9BE192BFED822002E032C /* NewWordData.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		D6B9BE1F2BFFF504002E032C /* FooterView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FooterView;
 			sourceTree = "<group>";
 		};
 		D6D4EA512BF802B300D1AE91 = {
@@ -307,6 +320,9 @@
 				D6DED23B2BFB6CB20053093B /* WordCell.swift */,
 				D6DED23C2BFB6CB20053093B /* WordCell.xib */,
 				D6DED23F2BFB6CC50053093B /* WordCellPresenter.swift */,
+				D6B9BE222BFFF745002E032C /* FooterCell.swift */,
+				D6B9BE232BFFF745002E032C /* FooterCell.xib */,
+				D6B9BE262BFFFC27002E032C /* FooterCellPresenter.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -314,6 +330,7 @@
 		D6EEF51E2BF96F6E0097E8D9 /* WordDetails */ = {
 			isa = PBXGroup;
 			children = (
+				D6B9BE1F2BFFF504002E032C /* FooterView */,
 				D6B9BE182BFED80E002E032C /* Entity */,
 				D6DED23A2BFB67830053093B /* Cell */,
 				D6EEF51F2BF96F850097E8D9 /* WordDetailViewController.swift */,
@@ -437,6 +454,7 @@
 				D6EEF5222BF96F850097E8D9 /* WordDetailViewController.xib in Resources */,
 				D6D4EA6A2BF802B500D1AE91 /* Assets.xcassets in Resources */,
 				D6D4EA652BF802B300D1AE91 /* Main.storyboard in Resources */,
+				D6B9BE252BFFF745002E032C /* FooterCell.xib in Resources */,
 				D6D4EAB82BF94E6800D1AE91 /* SplashViewController.xib in Resources */,
 				D625049F2BFA85D500144A9E /* HomeViewController.xib in Resources */,
 				D6D4EAC32BF957E400D1AE91 /* RecentSearchCell.xib in Resources */,
@@ -467,6 +485,7 @@
 				D6D4EAC22BF957E400D1AE91 /* RecentSearchCell.swift in Sources */,
 				D6D4EA9D2BF8DF6B00D1AE91 /* BaseViewController.swift in Sources */,
 				D6D4EABD2BF9578800D1AE91 /* ClassName.swift in Sources */,
+				D6B9BE272BFFFC27002E032C /* FooterCellPresenter.swift in Sources */,
 				D6EEF5282BF96FD40097E8D9 /* WordDetailRouter.swift in Sources */,
 				D6D4EABF2BF9579D00D1AE91 /* Collection.swift in Sources */,
 				D6D4EA622BF802B300D1AE91 /* SplashViewController.swift in Sources */,
@@ -486,6 +505,7 @@
 				D6D4EAB62BF93C2300D1AE91 /* HomeRouter.swift in Sources */,
 				D6D4EAB42BF93C1700D1AE91 /* HomePresenter.swift in Sources */,
 				D6D4EAAA2BF8E17700D1AE91 /* SplashInteractor.swift in Sources */,
+				D6B9BE242BFFF745002E032C /* FooterCell.swift in Sources */,
 				D6B9BE1A2BFED822002E032C /* NewWordData.swift in Sources */,
 				D6DED23D2BFB6CB20053093B /* WordCell.swift in Sources */,
 				D6D4EAA72BF8E15200D1AE91 /* SplashRouter.swift in Sources */,

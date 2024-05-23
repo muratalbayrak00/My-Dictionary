@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FooterCell" rowHeight="135" id="KGk-i7-Jjw" customClass="FooterCell" customModule="MyDictionary" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="394" height="135"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="394" height="135"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7C-Ly-q2A">
+                        <rect key="frame" x="0.0" y="0.0" width="394" height="135"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-zU-mqA">
+                                <rect key="frame" x="8" y="8" width="378" height="119"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synonym" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mO-gU-NLJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="378" height="39.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZOq-CR-Era">
+                                        <rect key="frame" x="0.0" y="39.666666666666671" width="378" height="39.666666666666671"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aiz-Z6-w9X">
+                                                <rect key="frame" x="0.0" y="0.0" width="126" height="39.666666666666664"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Button1"/>
+                                                <connections>
+                                                    <action selector="sysonymButton1:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sgR-Me-sgu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptK-l9-hN1">
+                                                <rect key="frame" x="126" y="0.0" width="126" height="39.666666666666664"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Button2"/>
+                                                <connections>
+                                                    <action selector="sysonymButton2:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="J2x-5J-BDQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Be-7K-t28">
+                                                <rect key="frame" x="252" y="0.0" width="126" height="39.666666666666664"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Button3"/>
+                                                <connections>
+                                                    <action selector="sysonymButton3:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ftI-zN-zQp"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GoS-iL-o07">
+                                        <rect key="frame" x="0.0" y="79.333333333333329" width="378" height="39.666666666666671"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcA-vj-NCd">
+                                                <rect key="frame" x="0.0" y="0.0" width="189" height="39.666666666666664"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Button4"/>
+                                                <connections>
+                                                    <action selector="sysonymButton4:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VKE-oX-N2X"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13A-Xb-caI">
+                                                <rect key="frame" x="189" y="0.0" width="189" height="39.666666666666664"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Button5"/>
+                                                <connections>
+                                                    <action selector="sysonymButton5:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TEn-3w-dEG"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cPt-zU-mqA" firstAttribute="top" secondItem="a7C-Ly-q2A" secondAttribute="top" constant="8" id="Isb-A5-G8b"/>
+                            <constraint firstAttribute="trailing" secondItem="cPt-zU-mqA" secondAttribute="trailing" constant="8" id="KJg-YU-Ajh"/>
+                            <constraint firstItem="cPt-zU-mqA" firstAttribute="leading" secondItem="a7C-Ly-q2A" secondAttribute="leading" constant="8" id="VHB-xY-bsp"/>
+                            <constraint firstAttribute="bottom" secondItem="cPt-zU-mqA" secondAttribute="bottom" constant="8" id="xjS-3s-iri"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="a7C-Ly-q2A" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="3GR-Kj-NgD"/>
+                    <constraint firstItem="a7C-Ly-q2A" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="SBo-e7-vb7"/>
+                    <constraint firstAttribute="bottom" secondItem="a7C-Ly-q2A" secondAttribute="bottom" id="bXT-RM-9EG"/>
+                    <constraint firstAttribute="trailing" secondItem="a7C-Ly-q2A" secondAttribute="trailing" id="xuk-PN-fC7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="sysonymButton1" destination="aiz-Z6-w9X" id="RN8-Nf-fxy"/>
+                <outlet property="sysonymButton2" destination="ptK-l9-hN1" id="9qf-ar-7nV"/>
+                <outlet property="sysonymButton3" destination="1Be-7K-t28" id="zLO-xo-gFa"/>
+                <outlet property="sysonymButton4" destination="xcA-vj-NCd" id="xdR-Ai-Qfi"/>
+                <outlet property="sysonymButton5" destination="13A-Xb-caI" id="00Q-UZ-77C"/>
+            </connections>
+            <point key="canvasLocation" x="186.25954198473281" y="19.366197183098592"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

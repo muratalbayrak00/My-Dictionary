@@ -23,6 +23,8 @@ protocol WordDetailPresenterProtocol: AnyObject {
     func getIsFiltering() -> Bool
     func updatedIsFiltering()
     func removeFilteredMeaning(_ text: String)
+    func getSynonyms() -> [String]?
+    func synonym(_ index: Int) -> String?
 }
 
 final class WordDetailPresenter {
@@ -37,6 +39,7 @@ final class WordDetailPresenter {
     var newData: [NewWordData] = []
     var filteredMeanings: [NewWordData] = []
     var isFiltering: Bool = false
+    var synonyms: [String] = ["Murat", "Baran", "telefone","deli","beni"]
     
     
     init(
@@ -75,7 +78,7 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         self.filteredMeanings = Array(Set(filteredMeanings))
         
         view.reloadData()
-        print("after adding \(self.filteredMeanings)")
+      //  print("after adding \(self.filteredMeanings)")
     }
     
     func removeFilteredMeaning(_ text: String) {
@@ -84,7 +87,7 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
             word.newPartOfSpeech?.lowercased() == text.lowercased()
         }
         view.reloadData()
-        print("after removing \(self.filteredMeanings)")
+       //print("after removing \(self.filteredMeanings)")
     }
     
     func updatedIsFiltering() {
@@ -95,7 +98,7 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
             self.isFiltering = false
         }
         
-        print("Is Filtering: \(isFiltering)")
+       // print("Is Filtering: \(isFiltering)")
         view.reloadData()
     }
     
@@ -150,13 +153,22 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         guard let phonetics = word.first?.phonetics else {
             return
         }
-        // TODO: bu kullanimin ismi ne 
+        // TODO: bu kullanimin ismi ne
         if let audioUrlString = phonetics.first(where: { $0.audio != nil && !$0.audio!.isEmpty })?.audio,
            let audioUrl = URL(string: audioUrlString) {
             player = AVPlayer(url: audioUrl)
             player?.play()
         }
     }
+    
+    func getSynonyms() -> [String]? {
+        return self.synonyms
+    }
+    
+    func synonym(_ index: Int) -> String? {
+        return self.synonyms[safe: index]
+    }
+    
     
 }
 
