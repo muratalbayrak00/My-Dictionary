@@ -14,6 +14,7 @@
                 <outlet property="clearButton" destination="Br9-70-YYl" id="55z-P6-tz8"/>
                 <outlet property="recentSearchLabel" destination="Aay-YZ-xSG" id="zk1-zd-4zv"/>
                 <outlet property="searchBar" destination="8XX-l5-Vsa" id="xOA-YI-9ge"/>
+                <outlet property="searchButton" destination="iN9-rZ-ZbM" id="TET-as-17D"/>
                 <outlet property="tableView" destination="rqX-qr-qJw" id="dJi-ek-g5O"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -70,7 +70,7 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     func didSelectRowAt(_ index: Int) {
-        print("selected recent cell \(self.recentSearchs[index])")
+        //print("selected recent cell \(self.recentSearchs[index])")
         let recentText = self.recentSearchs[index]
         router.navigate(.details(searchText: recentText))
     }

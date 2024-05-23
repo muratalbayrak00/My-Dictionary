@@ -16,7 +16,8 @@ protocol WordDetailViewControllerProtocol: AnyObject {
     func setPhoneticLabel(_ text: String)
     func showLoadingView()
     func hideLoadingView()
-    //func getSource() -> [WordsData]?
+    func showNotFound()
+    func getSelectedFilter() -> [String]
 }
 
 class WordDetailViewController: BaseViewController {
@@ -29,8 +30,6 @@ class WordDetailViewController: BaseViewController {
     var selectedFilterButtons: [String] = []
     var presenter: WordDetailPresenterProtocol!
     var searchText: String = ""
-    //var source: [WordsData]?
-    
     
     @IBOutlet weak var cancelFilterButton: UIButton!
     
@@ -42,17 +41,18 @@ class WordDetailViewController: BaseViewController {
     
     @IBOutlet weak var adverbFilterButton: UIButton!
     
+    @IBOutlet weak var playAudioButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter.viewDidLoad()
         
-        cancelFilterButton.isHidden = true
+        cancelFilterButton.isHidden = false
         
     }
     
     @IBAction func cancelFilterButton(_ sender: Any) {
-        
     }
     
     @IBAction func nounFilterButton(_ sender: Any) {
@@ -60,29 +60,31 @@ class WordDetailViewController: BaseViewController {
         
         if nounFilterButton.isSelected {
             nounFilterButton.isSelected = false
-           // cancelFilterButton.isHidden = true
             selectedFilterButtons.removeLast()
+            presenter.updatedIsFiltering()
+            presenter.removeFilteredMeaning("noun")
             if selectedFilterButtons.count == 0 {
                 cancelFilterButton.isHidden = true
             }
+            
         } else {
             nounFilterButton.isSelected = true
             cancelFilterButton.isHidden = false
             if let text = nounFilterButton.titleLabel?.text {
                 selectedFilterButtons.append(text)
+                presenter.addFilteredMeaning()
+                presenter.updatedIsFiltering()
             }
-
         }
-        
-        print(selectedFilterButtons)
-        
+
     }
     
     @IBAction func verbFilterButton(_ sender: Any) {
-        
         if verbFilterButton.isSelected {
             verbFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
+            presenter.removeFilteredMeaning("verb")
+            presenter.updatedIsFiltering()
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
@@ -90,19 +92,21 @@ class WordDetailViewController: BaseViewController {
             cancelFilterButton.isHidden = false
             verbFilterButton.isSelected = true
             if let text = verbFilterButton.titleLabel?.text {
-                selectedFilterButtons.append(text)
+                self.selectedFilterButtons.append(text)
+                presenter.addFilteredMeaning()
+                presenter.updatedIsFiltering()
             }
         }
-        
-        print(selectedFilterButtons)
-
     }
     
     @IBAction func adjectiveFilterButton(_ sender: Any) {
-        
+
         if adjectiveFilterButton.isSelected {
             adjectiveFilterButton.isSelected = false
+            
             selectedFilterButtons.removeLast()
+            presenter.removeFilteredMeaning("adjective")
+            presenter.updatedIsFiltering()
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
@@ -111,18 +115,22 @@ class WordDetailViewController: BaseViewController {
             adjectiveFilterButton.isSelected = true
             if let text = adjectiveFilterButton.titleLabel?.text {
                 selectedFilterButtons.append(text)
+                presenter.addFilteredMeaning()
+                presenter.updatedIsFiltering()
             }
         }
-        
-        print(selectedFilterButtons)
 
     }
     
     @IBAction func adverbFilterButton(_ sender: Any) {
         
+        
         if adverbFilterButton.isSelected {
             adverbFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
+            presenter.updatedIsFiltering()
+            presenter.removeFilteredMeaning("adverb")
+            
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
@@ -130,12 +138,12 @@ class WordDetailViewController: BaseViewController {
             cancelFilterButton.isHidden = false
             adverbFilterButton.isSelected = true
             if let text = adverbFilterButton.titleLabel?.text {
-                selectedFilterButtons.append(text)
+                self.selectedFilterButtons.append(text)
+                presenter.addFilteredMeaning()
+                presenter.updatedIsFiltering()
             }
         }
         
-        print(selectedFilterButtons)
-
     }
     
     @IBAction func playAudioButton(_ sender: Any) {
@@ -180,39 +188,58 @@ extension WordDetailViewController: WordDetailViewControllerProtocol {
         }
     }
     
-   // func getSource() -> [DictionaryApi.WordsData]? {
-        //return source
-   // }
+    func showNotFound() {
+        let alert = UIAlertController(title: "Sorry", message: "Word Could Not Found", preferredStyle: .alert)
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 270, height: 200))
+        imageView.image = UIImage(named: "notFoundImage2")
+        imageView.contentMode = .scaleAspectFit
+        
+        alert.view.addSubview(imageView)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+            
+            alert.view.heightAnchor.constraint(equalToConstant: 400).isActive = true
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor).isActive = true
+            imageView.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 50).isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: 270).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        }
+    }
     
-    
+    func getSelectedFilter() -> [String] {
+        return self.selectedFilterButtons
+    }
+
 }
 
 extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.numberOfItems()
-       // presenter.getWord()?.flatMap { $0.meanings ?? [] }.count ?? 0
+        if presenter.getIsFiltering() {
+            //print("getFilteredMeanings Count\(presenter.getFilteredMeanings().count)")
+            return presenter.getFilteredMeanings().count
+        }
+        return presenter.numberOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
-
-  
-//        if let word = presenter.word(indexPath.row) {
-//            cell.cellPresenter = WordCellPresenter(view: cell, word: word)
-//            //cell.cellPresenter.load()
-//            // "\(word.meanings.map { "\($0.partOfSpeech): \($0.definitions.first?.definition ?? "") \( $0.definitions.first?.example != nil ? "(\($0.definitions.first?.example ?? ""))" : "")" }".joined(separator: ", "))"
-//        }
         
-        if let word = presenter.newWord(indexPath.row) {
-            cell.cellPresenter = WordCellPresenter(view: cell, word: word)
+        if presenter.getIsFiltering() {
+            if let filteredWord = presenter.filteredMeanings(indexPath.row) {
+                cell.cellPresenter = WordCellPresenter(view: cell, word: filteredWord)
+            }
+        } else {
+            if let word = presenter.newWord(indexPath.row) {
+                cell.cellPresenter = WordCellPresenter(view: cell, word: word)
+            }
         }
-        
-            
         
         return cell
     }
-    
-
     
 }

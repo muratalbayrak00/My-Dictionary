@@ -16,6 +16,7 @@
                 <outlet property="cancelFilterButton" destination="tv6-M1-zPF" id="2gn-5E-AvC"/>
                 <outlet property="nounFilterButton" destination="FNo-1g-2xe" id="dvz-hp-qed"/>
                 <outlet property="phoneticLabel" destination="aGb-Gp-RPe" id="USk-ww-aM7"/>
+                <outlet property="playAudioButton" destination="PIY-0X-2cO" id="baH-Ko-eQM"/>
                 <outlet property="tableView" destination="lZJ-Pt-8uA" id="44y-bf-cbI"/>
                 <outlet property="verbFilterButton" destination="L8d-3P-SGg" id="I5O-JM-PRu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

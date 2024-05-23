@@ -19,7 +19,7 @@ protocol HomeViewControllerProtocol: AnyObject {
     func showClearButton()
 }
 
-final class HomeViewController: BaseViewController, UISearchBarDelegate {
+final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -30,6 +30,8 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
     @IBOutlet weak var recentSearchLabel: UILabel!
     
     @IBOutlet weak var clearButton: UIButton!
+    
+    @IBOutlet weak var searchButton: UIButton!
     
     @IBAction func clearRecentSearch(_ sender: Any) {
         presenter.clearRecentSearchs()
@@ -44,18 +46,23 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         
         presenter.viewDidLoad()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//        tapGesture.delegate = self
+//        view.addGestureRecognizer(tapGesture)
+//        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        
         searchBar.delegate = self
+        searchButton.isEnabled = false
+        buttonBottomConstraint.constant = 0
     }
     
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
+
     
     @IBAction func topSearchButton(_ sender: UIButton) {
         
@@ -64,6 +71,7 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
         if !searchText.isEmpty {
             presenter.updateRecentWords(searchText)
         }
+        
         presenter.topSearchButton(searchText)
         // When click the search button, clear search bar text.
         searchBar.searchTextField.text?.removeAll()
@@ -74,6 +82,15 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //print("Search text: \(searchText)")
+        if searchText.isEmpty {
+            searchButton.isEnabled = false
+        } else {
+            searchButton.isEnabled = true
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -110,6 +127,7 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate {
                 self.view.layoutIfNeeded()
             }
         }
+        
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -195,7 +213,19 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // buraya hicbir zaman girmiyor 
+        presenter.didSelectRowAt(indexPath.row)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView == tableView {
+            dismissKeyboard()
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.isDragging {
+            dismissKeyboard()
+        }
     }
     
 }
