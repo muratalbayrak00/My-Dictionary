@@ -147,11 +147,15 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
     }
     
     func playAudio() {
-        if let audioUrl = URL(string: word.first?.phonetics?.first?.audio ?? "") {
+        guard let phonetics = word.first?.phonetics else {
+            return
+        }
+        // TODO: bu kullanimin ismi ne 
+        if let audioUrlString = phonetics.first(where: { $0.audio != nil && !$0.audio!.isEmpty })?.audio,
+           let audioUrl = URL(string: audioUrlString) {
             player = AVPlayer(url: audioUrl)
             player?.play()
         }
-        
     }
     
 }
@@ -167,7 +171,6 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
             setCellDefinitions()
             view.reloadData()
         case .failure(let error):
-            
             DispatchQueue.main.async {
                 self.router.navigateBackWithError()
                 self.view.showNotFound()
@@ -181,7 +184,7 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
         
     }
     
-    func setCellDefinitions() {
+    func setCellDefinitions() { // TODO: bu fonksiyonun ismini degistir.
         
         for i in word {
             if let meanings = i.meanings {
@@ -197,28 +200,19 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
         }
     }
     
-    
-    
-    
-    
-    func setCombineMeanings(_ wordsData: [WordsData]) {
-        var allMeanings: [Meaning] = []
-        
-        for index in wordsData {
-            if let meanings = index.meanings {
-                allMeanings.append(contentsOf: meanings)
-            }
-        }
-        
-        if var firstWord = self.word.first {
-            firstWord.meanings = allMeanings.compactMap{$0}
-        }
-        
-        //print(self.word)
-        
-        //print(allMeanings)
-        //  let allMeanings = wordsData.flatMap { $0.combinedMeanings }
-        //  self.word[0].meanings = allMeanings
-    }
+//    func setCombineMeanings(_ wordsData: [WordsData]) {
+//        var allMeanings: [Meaning] = []
+//        
+//        for index in wordsData {
+//            if let meanings = index.meanings {
+//                allMeanings.append(contentsOf: meanings)
+//            }
+//        }
+//        
+//        if var firstWord = self.word.first {
+//            firstWord.meanings = allMeanings.compactMap{$0}
+//        }
+//        
+//    }
     
 }
