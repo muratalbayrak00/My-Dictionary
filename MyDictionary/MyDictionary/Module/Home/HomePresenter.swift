@@ -12,6 +12,7 @@ protocol HomePresenterProtocol {
     func viewDidLoad()
     func numberOfItems() -> Int
     func recentWords(_ index: Int) -> String?
+    func didSelectRowAt(_ index: Int)
     func topSearchButton(_ searchText: String)
     func updateRecentWords(_ text: String)
     func clearRecentSearchs()
@@ -52,10 +53,9 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     func viewDidLoad() {
-        view.setupTableView()
+        view.setupRecentTableView()
         view.setTitle("Search Word")
         view.setRecentLabel("Recent Search")
-        print(self.recentSearchs)
         setRecentSearchs()
         getRecentWordsOutput()
         setClearButtonVisibility()
@@ -69,6 +69,13 @@ extension HomePresenter: HomePresenterProtocol {
         return recentSearchs[index] // TODO: Burayi gereksiz olabilir tekrar bak.
     }
     
+    func didSelectRowAt(_ index: Int) {
+        print("selected recent cell \(self.recentSearchs[index])")
+        let recentText = self.recentSearchs[index]
+        router.navigate(.details(searchText: recentText))
+    }
+    
+
     private func getRecentSearchs() -> [String] {
         // TODO: Show loading
         return self.recentSearchs
@@ -82,10 +89,7 @@ extension HomePresenter: HomePresenterProtocol {
     func setRecentSearchs() {
         if let savedRecentSearchs = UserDefaults.standard.array(forKey: "RecentSearchs") as? [String] {
             self.recentSearchs = savedRecentSearchs
-            print("fdsa")
-            print(savedRecentSearchs)
-            print("fjdkaskfd")
-            print(self.recentSearchs)
+
         }
     }
     

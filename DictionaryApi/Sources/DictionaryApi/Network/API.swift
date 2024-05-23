@@ -85,7 +85,7 @@ extension API {
         method: RequestMethod = .get
     ) -> URLRequest? {
         let urlString = baseURL + word // TODO: burayi duzelt
-        print("Url String ->  \(urlString)")
+        //print("Url String ->  \(urlString)")
         guard let url = URL(string: urlString) else { return nil }
         
         var request = URLRequest(url: url)

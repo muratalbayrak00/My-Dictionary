@@ -8,42 +8,47 @@
 import Foundation
 
 public struct WordsData: Decodable {
-    public let word, phonetic: String
-    public let phonetics: [Phonetic]
-    public let meanings: [Meaning]
-    public let license: License
-    public let sourceUrls: [String]
+    
+    public let word, phonetic: String?
+    public let phonetics: [Phonetic]?
+    public var meanings: [Meaning]?
+    //public let license: License?
+    //public let sourceUrls: [String]?
     
     public var totalDefinitionsCount: Int {
-        return meanings.reduce(0) { $0 + $1.definitions.count }
+        return meanings?.reduce(0) { $0 + ($1.definitions?.count ?? 0) } ?? 0
+    }
+    
+    public var combinedMeanings: [Meaning] {
+        return meanings ?? []
     }
 }
 
 public struct License: Decodable {
-    public let name: String
-    public let url: String
+   // public let name: String?
+   // public let url: String?
 }
 
 public struct Meaning: Decodable {
-    public let partOfSpeech: String
-    public let definitions: [Definition]
-    public let synonyms, antonyms: [String]
+    public var partOfSpeech: String?
+    public var definitions: [Definition]?
 }
 
 public struct Definition: Decodable {
-    public let definition: String
+    public let definition: String?
     public let example: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case definition
+        case example
+    }
 }
 
 public struct Phonetic: Decodable {
-    public let text: String
-    public let audio: String
-    public let sourceURL: String?
-    public let license: License?
+    public let audio: String?
+    
+    public enum CodingKeys: String, CodingKey {
+        case audio
 
-    enum CodingKeys: String, CodingKey {
-        case text, audio
-        case sourceURL = "sourceUrl"
-        case license
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D625049E2BFA85D500144A9E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D625049C2BFA85D500144A9E /* HomeViewController.swift */; };
 		D625049F2BFA85D500144A9E /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D625049D2BFA85D500144A9E /* HomeViewController.xib */; };
+		D6B9BE1A2BFED822002E032C /* NewWordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B9BE192BFED822002E032C /* NewWordData.swift */; };
 		D6D4EA5E2BF802B300D1AE91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA5D2BF802B300D1AE91 /* AppDelegate.swift */; };
 		D6D4EA602BF802B300D1AE91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA5F2BF802B300D1AE91 /* SceneDelegate.swift */; };
 		D6D4EA622BF802B300D1AE91 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA612BF802B300D1AE91 /* SplashViewController.swift */; };
@@ -66,6 +67,7 @@
 /* Begin PBXFileReference section */
 		D625049C2BFA85D500144A9E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D625049D2BFA85D500144A9E /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		D6B9BE192BFED822002E032C /* NewWordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWordData.swift; sourceTree = "<group>"; };
 		D6D4EA5A2BF802B300D1AE91 /* MyDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D4EA5D2BF802B300D1AE91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D4EA5F2BF802B300D1AE91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6B9BE182BFED80E002E032C /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				D6B9BE192BFED822002E032C /* NewWordData.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		D6D4EA512BF802B300D1AE91 = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +314,7 @@
 		D6EEF51E2BF96F6E0097E8D9 /* WordDetails */ = {
 			isa = PBXGroup;
 			children = (
+				D6B9BE182BFED80E002E032C /* Entity */,
 				D6DED23A2BFB67830053093B /* Cell */,
 				D6EEF51F2BF96F850097E8D9 /* WordDetailViewController.swift */,
 				D6EEF5202BF96F850097E8D9 /* WordDetailViewController.xib */,
@@ -475,6 +486,7 @@
 				D6D4EAB62BF93C2300D1AE91 /* HomeRouter.swift in Sources */,
 				D6D4EAB42BF93C1700D1AE91 /* HomePresenter.swift in Sources */,
 				D6D4EAAA2BF8E17700D1AE91 /* SplashInteractor.swift in Sources */,
+				D6B9BE1A2BFED822002E032C /* NewWordData.swift in Sources */,
 				D6DED23D2BFB6CB20053093B /* WordCell.swift in Sources */,
 				D6D4EAA72BF8E15200D1AE91 /* SplashRouter.swift in Sources */,
 				D6D4EA602BF802B300D1AE91 /* SceneDelegate.swift in Sources */,

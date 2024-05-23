@@ -9,11 +9,9 @@ import Foundation
 import DictionaryApi
 
 
-fileprivate var wordService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
-
 typealias WordsSourcesResult = Result<[WordsData], NetworkError>
 
-
+fileprivate var wordService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
 
 protocol WordDetailInteractorProtocol: AnyObject {
     func fetchWord()
@@ -33,9 +31,7 @@ extension WordDetailInteractor: WordDetailInteractorProtocol {
     func fetchWord() {
         wordService.fetchWords { [weak self] result in
             guard let self else { return }
-            print("murat deneme ))))))))))))))))))))))")
             self.output?.fetchWordOutput(result: result)
         }
     }
-    
 }

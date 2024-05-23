@@ -11,7 +11,7 @@ protocol HomeViewControllerProtocol: AnyObject {
     func reloadData()
     func showLoadingView()
     func hideLoadingView()
-    func setupTableView()
+    func setupRecentTableView()
     func showError(_ message: String)
     func setTitle(_ title: String)
     func setRecentLabel(_ title: String)
@@ -139,8 +139,12 @@ extension HomeViewController: HomeViewControllerProtocol {
         hideLoading()
     }
     
-    func setupTableView() {
-        tableView.register(cellType: RecentSearchCell.self)
+    func setupRecentTableView() {
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.isUserInteractionEnabled = true
+        tableView.allowsSelection = true
+        self.tableView.register(cellType: RecentSearchCell.self)
     }
     
     func showError(_ message: String) {
@@ -173,20 +177,25 @@ extension HomeViewController: UISearchResultsUpdating {
     
 }
 
+
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.numberOfItems()
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(with: RecentSearchCell.self, for: indexPath)
-        
         if let recentWord = presenter.recentWords(indexPath.row) {
             cell.cellPresenter = RecentSearchCellPresenter(view: cell, recentWord: recentWord)
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // buraya hicbir zaman girmiyor 
     }
     
 }

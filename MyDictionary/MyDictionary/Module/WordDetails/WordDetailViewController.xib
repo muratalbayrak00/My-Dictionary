@@ -11,8 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordDetailViewController" customModule="MyDictionary" customModuleProvider="target">
             <connections>
+                <outlet property="adjectiveFilterButton" destination="gOG-lw-WeR" id="FMp-KZ-vNS"/>
+                <outlet property="adverbFilterButton" destination="BU9-xW-hKf" id="QUL-RG-qR1"/>
+                <outlet property="cancelFilterButton" destination="tv6-M1-zPF" id="2gn-5E-AvC"/>
+                <outlet property="nounFilterButton" destination="FNo-1g-2xe" id="dvz-hp-qed"/>
                 <outlet property="phoneticLabel" destination="aGb-Gp-RPe" id="USk-ww-aM7"/>
                 <outlet property="tableView" destination="lZJ-Pt-8uA" id="44y-bf-cbI"/>
+                <outlet property="verbFilterButton" destination="L8d-3P-SGg" id="I5O-JM-PRu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wordTitleLabel" destination="Hyt-jz-FVb" id="jCd-6T-C9f"/>
             </connections>
@@ -68,6 +73,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="49.666666666666664" height="28.333333333333332"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system"/>
+                                    <connections>
+                                        <action selector="cancelFilterButton:" destination="-1" eventType="touchUpInside" id="4OO-Z1-VJB"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="FNo-1g-2xe">
                                     <rect key="frame" x="67" y="0.0" width="54" height="28.333333333333332"/>
@@ -76,6 +84,9 @@
                                     <buttonConfiguration key="configuration" style="tinted" title="Noun">
                                         <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="nounFilterButton:" destination="-1" eventType="touchUpInside" id="OS1-qj-f0c"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="L8d-3P-SGg">
                                     <rect key="frame" x="138.33333333333334" y="0.0" width="50.333333333333343" height="28.333333333333332"/>
@@ -84,6 +95,9 @@
                                     <buttonConfiguration key="configuration" style="tinted" title="Verb">
                                         <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="verbFilterButton:" destination="-1" eventType="touchUpInside" id="lW7-pQ-3Wo"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="gOG-lw-WeR">
                                     <rect key="frame" x="206" y="0.0" width="76.333333333333314" height="28.333333333333332"/>
@@ -92,6 +106,9 @@
                                     <buttonConfiguration key="configuration" style="tinted" title="Adjective">
                                         <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="adjectiveFilterButton:" destination="-1" eventType="touchUpInside" id="4C5-6c-bPc"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="BU9-xW-hKf">
                                     <rect key="frame" x="299.66666666666669" y="0.0" width="64.333333333333314" height="28.333333333333332"/>
@@ -100,6 +117,9 @@
                                     <buttonConfiguration key="configuration" style="tinted" title="Adverb">
                                         <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="adverbFilterButton:" destination="-1" eventType="touchUpInside" id="8DX-5A-vbu"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="Ixw-xa-5KB"/>

@@ -68,9 +68,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="arrowIcon" destination="blA-eB-NF2" id="3Ki-JU-nWZ"/>
-                <outlet property="searchIcon" destination="weO-Fb-IKu" id="J4L-Xv-vJp"/>
-                <outlet property="wordLabel" destination="N9H-ds-Xys" id="Wrn-pv-sfa"/>
+                <outlet property="arrowIcon" destination="blA-eB-NF2" id="kbq-zX-QNr"/>
+                <outlet property="searchIcon" destination="weO-Fb-IKu" id="vuX-EN-ehL"/>
+                <outlet property="wordLabel" destination="N9H-ds-Xys" id="jaT-MD-cRn"/>
             </connections>
             <point key="canvasLocation" x="138.1679389312977" y="-14.788732394366198"/>
         </tableViewCell>
