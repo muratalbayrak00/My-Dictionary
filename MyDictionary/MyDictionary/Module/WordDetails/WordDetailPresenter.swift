@@ -12,6 +12,7 @@ import AVFoundation
 
 protocol WordDetailPresenterProtocol: AnyObject {
     func viewDidLoad()
+    func viewWillAppear()
     func numberOfItems() -> Int
     func getWord() -> [WordsData]?
     func word(_ index: Int) -> WordsData?
@@ -21,6 +22,8 @@ protocol WordDetailPresenterProtocol: AnyObject {
     func getFilteredMeanings() -> [NewWordData]
     func addFilteredMeaning()
     func getIsFiltering() -> Bool
+    func setIsFiltering()
+    func getWordTypes() -> [String]
     func updatedIsFiltering()
     func removeFilteredMeaning(_ text: String)
     func getSynonyms() -> [SynonymData]?
@@ -42,7 +45,8 @@ final class WordDetailPresenter {
     var filteredMeanings: [NewWordData] = []
     var isFiltering: Bool = false
     var synonyms: [SynonymData] = []
-    var topSynonyms: [SynonymData] = []
+    var topSynonyms: [NewSynonymData] = []
+    var wordTypes: [String] = []
     
     
     init(
@@ -58,6 +62,8 @@ final class WordDetailPresenter {
 }
 
 extension WordDetailPresenter: WordDetailPresenterProtocol {
+
+    
     func getRouter() -> WordDetailRouterProtocol {
         return router
     }
@@ -67,6 +73,18 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         return self.isFiltering
     }
     
+    func setIsFiltering() {
+        
+        if isFiltering {
+            isFiltering = false
+        } else {
+            isFiltering = true
+        }
+    }
+    
+    func getWordTypes() -> [String] {
+        return self.wordTypes
+    }
     
     func getFilteredMeanings() -> [NewWordData] {
         return self.filteredMeanings
@@ -109,10 +127,27 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
     func viewDidLoad() {
         view.setupTableView()
         view.setTableViewHeight()
-        view.reloadData()
         fetchWordsFunc()
+        view.reloadData()
         fetchSynonymFunc()
         view.reloadData()
+    }
+    
+    func setFilterButtonHidden() {
+        var tempWordTypes: [String] = []
+        for meaning in newData {
+            if let type = meaning.newPartOfSpeech {
+                tempWordTypes.append(type.lowercased())
+            }
+        }
+       // print("tempWordTypes \(tempWordTypes)")
+        self.wordTypes = Array(Set(tempWordTypes))
+        //print("wordtypes \(self.wordTypes)")
+
+    }
+    
+    func viewWillAppear() {
+
     }
     
     func setTitleLabels() {
@@ -131,6 +166,7 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
     
     func fetchSynonymFunc() {
         interactor.fetchSynonym()
+        view.reloadData()
     }
     
     func numberOfItems() -> Int {
@@ -194,6 +230,8 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
             self.word = response // burayi duzelt json orneklerine bak green ve run birbirinden farkli
             setTitleLabels()
             setCellDefinitions()
+            setFilterButtonHidden()
+            view.hiddenFilterButtons(wordTypes)
             view.reloadData()
         case .failure(let error):
             DispatchQueue.main.async {
@@ -230,20 +268,5 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
             }
         }
     }
-    
-//    func setCombineMeanings(_ wordsData: [WordsData]) {
-//        var allMeanings: [Meaning] = []
-//        
-//        for index in wordsData {
-//            if let meanings = index.meanings {
-//                allMeanings.append(contentsOf: meanings)
-//            }
-//        }
-//        
-//        if var firstWord = self.word.first {
-//            firstWord.meanings = allMeanings.compactMap{$0}
-//        }
-//        
-//    }
     
 }

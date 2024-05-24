@@ -36,39 +36,23 @@ extension WordCellPresenter: WordCellPresenterProtocol {
     }
     
     func load() {
+        
+        setHiddenLabel()
         //TODO: gelen json a gore burayi duzenle
         view?.setWordType(self.word.newPartOfSpeech ?? "")
         view?.setWordMeaning(self.word.newDefinition ?? "")
-        
-      //  view?.setExampleLabel("Example")
         view?.setExampleSentence(self.word.newExample ?? "")
-//        guard let meanings = word.meanings else {
-//                    view?.setWordType("N/A")
-//                    view?.setWordMeaning("Anlam mevcut değil")
-//                    view?.setExampleLabel("Örnek")
-//                    view?.setExampleSentence("Örnek mevcut değil")
-//                    return
-//                }
-//                
-//                // Tüm meanings ve definitions'ları işle
-//                for meaning in meanings {
-//                    if let partOfSpeech = meaning.partOfSpeech {
-//                        view?.setWordType(partOfSpeech)
-//                    }
-//                    
-//                    if let definitions = meaning.definitions {
-//                        for definition in definitions {
-//                            if let definitionText = definition.definition {
-//                                view?.setWordMeaning(definitionText)
-//                            }
-//                            
-//                            if let example = definition.example {
-//                                view?.setExampleLabel("Örnek")
-//                                view?.setExampleSentence(example)
-//                            }
-//                        }
-//                    }
-//                }
+
+    }
+    
+    func setHiddenLabel() {
+        
+        if word.newExample == nil || word.newExample == "" {
+            view?.setHiddenExample(true) // set isHidden True
+        } else {
+            view?.setHiddenExample(false)
+        }
+        
     }
     
 }

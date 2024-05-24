@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D625049E2BFA85D500144A9E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D625049C2BFA85D500144A9E /* HomeViewController.swift */; };
 		D625049F2BFA85D500144A9E /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D625049D2BFA85D500144A9E /* HomeViewController.xib */; };
+		D63C46212C0103C600A86911 /* NewSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63C46202C0103C600A86911 /* NewSynonym.swift */; };
 		D6B9BE1A2BFED822002E032C /* NewWordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B9BE192BFED822002E032C /* NewWordData.swift */; };
 		D6B9BE242BFFF745002E032C /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B9BE222BFFF745002E032C /* FooterCell.swift */; };
 		D6B9BE252BFFF745002E032C /* FooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6B9BE232BFFF745002E032C /* FooterCell.xib */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		D625049C2BFA85D500144A9E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D625049D2BFA85D500144A9E /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		D63C46202C0103C600A86911 /* NewSynonym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSynonym.swift; sourceTree = "<group>"; };
 		D6B9BE192BFED822002E032C /* NewWordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWordData.swift; sourceTree = "<group>"; };
 		D6B9BE222BFFF745002E032C /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
 		D6B9BE232BFFF745002E032C /* FooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCell.xib; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				D6B9BE192BFED822002E032C /* NewWordData.swift */,
+				D63C46202C0103C600A86911 /* NewSynonym.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 			files = (
 				D6D4EAC22BF957E400D1AE91 /* RecentSearchCell.swift in Sources */,
 				D6D4EA9D2BF8DF6B00D1AE91 /* BaseViewController.swift in Sources */,
+				D63C46212C0103C600A86911 /* NewSynonym.swift in Sources */,
 				D6D4EABD2BF9578800D1AE91 /* ClassName.swift in Sources */,
 				D6B9BE272BFFFC27002E032C /* FooterCellPresenter.swift in Sources */,
 				D6EEF5282BF96FD40097E8D9 /* WordDetailRouter.swift in Sources */,

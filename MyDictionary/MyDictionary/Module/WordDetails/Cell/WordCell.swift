@@ -13,6 +13,7 @@ protocol WordCellProtocol: AnyObject {
     func setExampleLabel(_ text: String)
     func setExampleSentence(_ text: String)
     func getHaveExample() -> Bool
+    func setHiddenExample(_ status: Bool)
 }
 
 class WordCell: UITableViewCell {
@@ -30,15 +31,20 @@ class WordCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-        UIView.animate(withDuration: 0.5) {
-            self.transform = CGAffineTransform.identity
-        }
+//        self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//        UIView.animate(withDuration: 0.5) {
+//            self.transform = CGAffineTransform.identity
+//        }
     }
     
 }
 
 extension WordCell: WordCellProtocol {
+    
+    func setHiddenExample(_ status: Bool) {
+        self.exampleTextLabel.isHidden = status
+        self.exampleSentenceLabel.isHidden = status
+    }
     
     func getHaveExample() -> Bool {
         return cellPresenter.getHaveStatus()

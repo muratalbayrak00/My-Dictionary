@@ -53,10 +53,9 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
- 
         searchBar.delegate = self
         searchButton.isEnabled = false
-        buttonBottomConstraint.constant = 0
+        buttonBottomConstraint.constant = 10
     }
     
     @objc private func dismissKeyboard() {
@@ -132,7 +131,7 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
     
     @objc func keyboardWillHide(notification: NSNotification) {
         
-        buttonBottomConstraint.constant = 0
+        buttonBottomConstraint.constant = 10
         
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()

@@ -18,6 +18,7 @@ protocol WordDetailViewControllerProtocol: AnyObject {
     func hideLoadingView()
     func showNotFound()
     func getSelectedFilter() -> [String]
+    func hiddenFilterButtons(_ wordTypes: [String])
 }
 
 class WordDetailViewController: BaseViewController {
@@ -48,23 +49,65 @@ class WordDetailViewController: BaseViewController {
         super.viewDidLoad()
         
         presenter.viewDidLoad()
+        tableView.reloadData()
         
-        cancelFilterButton.isHidden = false
-        //let footerCellNib = UINib(nibName: "FooterCell", bundle: nil)
-        //tableView.register(footerCellNib, forCellReuseIdentifier: "FooterCell")
+        cancelFilterButton.isHidden = true
+        setButtonContraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //presenter.viewWillAppear()
         
+    }
+    
+    func hiddenFilterButtons(_ wordTypes: [String]) {
+        DispatchQueue.main.async {
+            if !self.presenter.getWordTypes().contains(where: { $0 == "noun" }) {
+                self.nounFilterButton.isHidden = true
+            }
+            if !self.presenter.getWordTypes().contains(where: { $0 == "verb" }) {
+
+                self.verbFilterButton.isHidden = true
+            }
+            if !self.presenter.getWordTypes().contains(where: { $0 == "adjective" }) {
+
+                self.adjectiveFilterButton.isHidden = true
+            }
+            if !self.presenter.getWordTypes().contains(where: { $0 == "adverb" }) {
+
+                self.adverbFilterButton.isHidden = true
+            }
+        }
+
     }
     
     @IBAction func cancelFilterButton(_ sender: Any) {
+        selectedFilterButtons.removeAll()
+        presenter.updatedIsFiltering()
+        tableView.reloadData()
+        setButtonsNonSelected()
+    }
+    
+    func setButtonsNonSelected() {
+        nounFilterButton.isSelected = false
+        verbFilterButton.isSelected = false
+        adverbFilterButton.isSelected = false
+        adjectiveFilterButton.isSelected = false
+        
+        presenter.removeFilteredMeaning("noun")
+        presenter.removeFilteredMeaning("verb")
+        presenter.removeFilteredMeaning("adjective")
+        presenter.removeFilteredMeaning("adverb")
     }
     
     @IBAction func nounFilterButton(_ sender: Any) {
-        // TODO: buradaki if let yapisini degistir belki en basa geleblir gibi duzelt sonradan
         
         if nounFilterButton.isSelected {
             nounFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
             presenter.updatedIsFiltering()
+            tableView.reloadData()
             presenter.removeFilteredMeaning("noun")
             if selectedFilterButtons.count == 0 {
                 cancelFilterButton.isHidden = true
@@ -77,6 +120,8 @@ class WordDetailViewController: BaseViewController {
                 selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                tableView.reloadData()
+
             }
         }
         
@@ -88,6 +133,7 @@ class WordDetailViewController: BaseViewController {
             selectedFilterButtons.removeLast()
             presenter.removeFilteredMeaning("verb")
             presenter.updatedIsFiltering()
+            tableView.reloadData()
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
@@ -98,6 +144,7 @@ class WordDetailViewController: BaseViewController {
                 self.selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                tableView.reloadData()
             }
         }
     }
@@ -110,6 +157,7 @@ class WordDetailViewController: BaseViewController {
             selectedFilterButtons.removeLast()
             presenter.removeFilteredMeaning("adjective")
             presenter.updatedIsFiltering()
+            tableView.reloadData()
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
@@ -120,6 +168,7 @@ class WordDetailViewController: BaseViewController {
                 selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                tableView.reloadData()
             }
         }
         
@@ -132,6 +181,7 @@ class WordDetailViewController: BaseViewController {
             adverbFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
             presenter.updatedIsFiltering()
+            tableView.reloadData()
             presenter.removeFilteredMeaning("adverb")
             
             if selectedFilterButtons.isEmpty {
@@ -144,6 +194,7 @@ class WordDetailViewController: BaseViewController {
                 self.selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                tableView.reloadData()
             }
         }
         
@@ -153,12 +204,22 @@ class WordDetailViewController: BaseViewController {
         presenter.playAudio()
     }
     
+    func setButtonContraints() {
+        
+        //nounFilterButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        //button2.widthAnchor.constraint(equalToConstant: 100).isActive = true
+       // button3.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        //button4.widthAnchor.constraint(equalToConstant: 100).isActive = true
+
+    }
+    
+    
 }
 
 extension WordDetailViewController: WordDetailViewControllerProtocol {
     
     func setTableViewHeight() {
-        self.tableView.rowHeight = UITableView.automaticDimension
+       // self.tableView.rowHeight = UITableView.automaticDimension
     }
     
     func setWordTitle(_ text: String) {
@@ -181,8 +242,8 @@ extension WordDetailViewController: WordDetailViewControllerProtocol {
     func setupTableView() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.register(cellType: WordCell.self)
         self.tableView.register(cellType: FooterCell.self)
+        self.tableView.register(cellType: WordCell.self)
     }
     
     func reloadData() {
@@ -192,7 +253,7 @@ extension WordDetailViewController: WordDetailViewControllerProtocol {
     }
     
     func showNotFound() {
-        let alert = UIAlertController(title: "Sorry", message: "Word Could Not Found", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Sorry", message: "Word Could Not Be Found", preferredStyle: .alert)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 270, height: 200))
         imageView.image = UIImage(named: "notFoundImage2")
@@ -227,9 +288,9 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if presenter.getIsFiltering() {
             //print("getFilteredMeanings Count\(presenter.getFilteredMeanings().count)")
-            return presenter.getFilteredMeanings().count
+            return presenter.getFilteredMeanings().count+1
         }
-        return presenter.numberOfItems()
+        return presenter.numberOfItems()+1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -247,23 +308,33 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
             let wordCell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
             if presenter.getIsFiltering() {
                 if let filteredWord = presenter.filteredMeanings(indexPath.row) {
-                    if filteredWord.newExample == nil {
+                    if filteredWord.newExample == nil || filteredWord.newExample == "" {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: false)
-                        self.tableView.rowHeight = 85
+                        self.tableView.rowHeight = 110
+                      //  tableView.reloadRows(at: [indexPath], with: .automatic)
+                        //self.tableView.reloadData()
                     } else {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: true)
-                        self.tableView.rowHeight = 150
-                        
+                        self.tableView.rowHeight = 130
+                       // tableView.reloadRows(at: [indexPath], with: .automatic)
+
+                        //self.tableView.reloadData()
                     }
                 }
             } else {
                 if let word = presenter.newWord(indexPath.row) {
-                    if word.newExample == nil {
+                    if word.newExample == nil || word.newExample == "" {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: false)
-                        self.tableView.rowHeight = 85
+                        self.tableView.rowHeight = 110
+                       // tableView.reloadRows(at: [indexPath], with: .automatic)
+
+                        //self.tableView.reloadData()
                     } else {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: true)
-                        self.tableView.rowHeight = 150
+                        self.tableView.rowHeight = 130
+                       // tableView.reloadRows(at: [indexPath], with: .automatic)
+
+                        //self.tableView.reloadData()
                     }
                 }
             }

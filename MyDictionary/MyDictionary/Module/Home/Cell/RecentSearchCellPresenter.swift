@@ -30,10 +30,15 @@ final class RecentSearchCellPresenter {
 extension RecentSearchCellPresenter: RecentSearchCellPresenterProtocol {
     
     func load() {
-        view?.setSearchIcon(UIImage(systemName: "magnifyingglass") ?? UIImage(named: "defaultIcon")! )
-        view?.setWordLabel(recentWord)
-        view?.setWordLabel(recentWord)
+        view?.setSearchIcon(UIImage(systemName: "magnifyingglass") ?? UIImage(named: "defaultIcon")! )        
+        view?.setWordLabel("   \(recentWord.capitalizingFirstLetter())")
         view?.setArrowIcon(UIImage(systemName: "arrow.right") ?? UIImage(named: "defaultIcon")!)
     }
     
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).uppercased() + dropFirst()
+    }
 }

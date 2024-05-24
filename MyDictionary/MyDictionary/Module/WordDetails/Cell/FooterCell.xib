@@ -33,9 +33,9 @@
                                         <rect key="frame" x="0.0" y="41.333333333333329" width="378" height="36.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aiz-Z6-w9X">
-                                                <rect key="frame" x="0.0" y="1" width="112" height="34.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="1" width="116.66666666666667" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button1" cornerStyle="capsule">
+                                                <buttonConfiguration key="configuration" style="plain" title="Synonym1" cornerStyle="capsule" titleAlignment="center">
                                                     <backgroundConfiguration key="background" strokeWidth="1" strokeOutset="-1">
                                                         <color key="strokeColor" systemColor="linkColor"/>
                                                     </backgroundConfiguration>
@@ -45,9 +45,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptK-l9-hN1">
-                                                <rect key="frame" x="124" y="1" width="116.33333333333331" height="34.333333333333336"/>
+                                                <rect key="frame" x="128.66666666666666" y="1" width="117" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button2" cornerStyle="capsule">
+                                                <buttonConfiguration key="configuration" style="plain" title="Synonym1" cornerStyle="capsule" titleAlignment="center">
                                                     <backgroundConfiguration key="background" strokeWidth="1" strokeOutset="-1">
                                                         <color key="strokeColor" systemColor="linkColor"/>
                                                     </backgroundConfiguration>
@@ -57,9 +57,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Be-7K-t28">
-                                                <rect key="frame" x="252.33333333333329" y="1" width="125.66666666666666" height="34.333333333333336"/>
+                                                <rect key="frame" x="257.66666666666669" y="1" width="120.33333333333331" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button3" cornerStyle="capsule">
+                                                <buttonConfiguration key="configuration" style="plain" title="Synonym1" cornerStyle="capsule" titleAlignment="center">
                                                     <backgroundConfiguration key="background" strokeWidth="1" strokeOutset="-1">
                                                         <color key="strokeColor" systemColor="linkColor"/>
                                                     </backgroundConfiguration>
@@ -81,12 +81,9 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcA-vj-NCd">
-                                                <rect key="frame" x="51.333333333333343" y="1" width="120" height="34.333333333333336"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="Nr7-EI-381"/>
-                                                </constraints>
+                                                <rect key="frame" x="57.333333333333321" y="1" width="101.66666666666669" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button4" cornerStyle="capsule">
+                                                <buttonConfiguration key="configuration" style="plain" title="Synonym1" cornerStyle="capsule" titleAlignment="center">
                                                     <backgroundConfiguration key="background" strokeWidth="1" strokeOutset="-1">
                                                         <color key="strokeColor" systemColor="linkColor"/>
                                                     </backgroundConfiguration>
@@ -96,12 +93,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13A-Xb-caI">
-                                                <rect key="frame" x="206.66666666666663" y="1" width="120" height="34.333333333333336"/>
+                                                <rect key="frame" x="200.66666666666663" y="1" width="120" height="34.333333333333336"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="tNt-6A-v2k"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button5" cornerStyle="capsule">
+                                                <buttonConfiguration key="configuration" style="plain" title="Synonym1" cornerStyle="capsule" titleAlignment="center">
                                                     <backgroundConfiguration key="background" strokeWidth="1" strokeOutset="-1">
                                                         <color key="strokeColor" systemColor="linkColor"/>
                                                     </backgroundConfiguration>

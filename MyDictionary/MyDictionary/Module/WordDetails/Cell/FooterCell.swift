@@ -13,6 +13,12 @@ protocol FooterCellProtocol: AnyObject {
     func setSysonymButton3(_ text: String)
     func setSysonymButton4(_ text: String)
     func setSysonymButton5(_ text: String)
+    func setHiddenButton1(_ status: Bool)
+    func setHiddenButton2(_ status: Bool)
+    func setHiddenButton3(_ status: Bool)
+    func setHiddenButton4(_ status: Bool)
+    func setHiddenButton5(_ status: Bool)
+    func setDisableButton1(_ status: Bool)
     
 }
 class FooterCell: UITableViewCell {
@@ -46,10 +52,9 @@ class FooterCell: UITableViewCell {
         
         if let text = sysonymButton1.titleLabel?.text {
             router.navigate(.synonym(text))
-            print(text)
+           // print(text)
         }
     }
-    
     @IBAction func sysonymButton2(_ sender: Any) {
         
         if let text = sysonymButton2.titleLabel?.text {
@@ -80,7 +85,7 @@ class FooterCell: UITableViewCell {
 }
 
 extension FooterCell: FooterCellProtocol {
-    
+
     func setSysonymButton1(_ text: String) {
         sysonymButton1.titleLabel?.text = text
     }
@@ -101,5 +106,30 @@ extension FooterCell: FooterCellProtocol {
         sysonymButton5.titleLabel?.text = text
     }
     
+    func setHiddenButton1(_ status: Bool) {
+        sysonymButton1.isHidden = status
+    }
     
+    func setHiddenButton2(_ status: Bool) {
+        sysonymButton2.isHidden = status
+    }
+    
+    func setHiddenButton3(_ status: Bool) {
+        sysonymButton3.isHidden = status
+    }
+    
+    func setHiddenButton4(_ status: Bool) {
+        sysonymButton4.isHidden = status
+    }
+    
+    func setHiddenButton5(_ status: Bool) {
+        sysonymButton5.isHidden = status
+    }
+    
+    func setDisableButton1(_ status: Bool) {
+        //sysonymButton1.isEnabled = status
+        sysonymButton1.isUserInteractionEnabled = status
+    }
+    
+ 
 }

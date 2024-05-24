@@ -59,6 +59,7 @@ extension WordDetailRouter: WordDetailRouterProtocol {
             let detailsVC = WordDetailRouter.createModule()
             detailsVC.searchText = text
             word = text
+         
             viewController?.navigationController?.pushViewController(detailsVC, animated: true)
         }
     }
