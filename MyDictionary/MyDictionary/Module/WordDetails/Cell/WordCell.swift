@@ -12,6 +12,7 @@ protocol WordCellProtocol: AnyObject {
     func setWordMeaning(_ text: String)
     func setExampleLabel(_ text: String)
     func setExampleSentence(_ text: String)
+    func getHaveExample() -> Bool
 }
 
 class WordCell: UITableViewCell {
@@ -39,9 +40,16 @@ class WordCell: UITableViewCell {
 
 extension WordCell: WordCellProtocol {
     
+    func getHaveExample() -> Bool {
+        return cellPresenter.getHaveStatus()
+    }
+    
     func setWordType(_ text: String) {
+        wordTypeLabel.font = UIFont.boldSystemFont(ofSize: 19)
+        wordTypeLabel.font = UIFont.italicSystemFont(ofSize: 19)
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.wordTypeLabel.text = capitalizedText
+
     }
     
     func setWordMeaning(_ text: String) {
@@ -52,11 +60,19 @@ extension WordCell: WordCellProtocol {
     func setExampleLabel(_ text: String) {
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.exampleTextLabel.text = capitalizedText
+
     }
     
     func setExampleSentence(_ text: String) {
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.exampleSentenceLabel.text = capitalizedText
+        if text.isEmpty {
+            exampleSentenceLabel.isHidden = true
+            exampleTextLabel.isHidden = true
+        } else {
+            exampleSentenceLabel.isHidden = false
+            exampleTextLabel.isHidden = false
+        }
     }
     
 }

@@ -10,6 +10,7 @@ import DictionaryApi
 
 protocol WordCellPresenterProtocol: AnyObject {
     func load()
+    func getHaveStatus() -> Bool
 }
 
 final class WordCellPresenter {
@@ -18,23 +19,29 @@ final class WordCellPresenter {
     weak var view: WordCellProtocol?
     //private var word: WordsData
     private var word: NewWordData
+    private var haveExample: Bool
     
-    init(view: WordCellProtocol? = nil, word: NewWordData) {
+    init(view: WordCellProtocol? = nil, word: NewWordData, haveExample: Bool) {
         self.view = view
         self.word = word
+        self.haveExample = haveExample
     }
     
 }
 
 extension WordCellPresenter: WordCellPresenterProtocol {
+
+    func getHaveStatus() -> Bool {
+        return self.haveExample
+    }
     
     func load() {
         //TODO: gelen json a gore burayi duzenle
-        view?.setWordType(self.word.newPartOfSpeech ?? "Tur")
-        view?.setWordMeaning(self.word.newDefinition ?? "Anlam")
+        view?.setWordType(self.word.newPartOfSpeech ?? "")
+        view?.setWordMeaning(self.word.newDefinition ?? "")
         
       //  view?.setExampleLabel("Example")
-        view?.setExampleSentence(self.word.newExample ?? "Yok")
+        view?.setExampleSentence(self.word.newExample ?? "")
 //        guard let meanings = word.meanings else {
 //                    view?.setWordType("N/A")
 //                    view?.setWordMeaning("Anlam mevcut değil")

@@ -105,6 +105,7 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
     func viewDidLoad() {
         view.setupTableView()
         view.setTableViewHeight()
+        view.reloadData()
         fetchWordsFunc()
     }
     

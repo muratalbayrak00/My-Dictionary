@@ -29,6 +29,7 @@ class WordDetailViewController: BaseViewController {
     
     var selectedFilterButtons: [String] = []
     var presenter: WordDetailPresenterProtocol!
+    
     var searchText: String = ""
     
     @IBOutlet weak var cancelFilterButton: UIButton!
@@ -157,8 +158,16 @@ class WordDetailViewController: BaseViewController {
 extension WordDetailViewController: WordDetailViewControllerProtocol {
     
     func setTableViewHeight() {
+ 
+ 
         self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.rowHeight = 150
+//        if let haveExample = cell?.getHaveExample(), haveExample {
+//            self.tableView.rowHeight = 150
+//        } else {
+//            self.tableView.rowHeight = 100
+//        }
+            
+       
     }
     
     func setWordTitle(_ text: String) {
@@ -248,11 +257,26 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
             let wordCell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
             if presenter.getIsFiltering() {
                 if let filteredWord = presenter.filteredMeanings(indexPath.row) {
-                    wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord)
+                    if filteredWord.newExample == nil {
+                        print("1")
+                        wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: false)
+                    } else {
+                        print("2")
+                        wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: true)
+
+                    }
                 }
             } else {
                 if let word = presenter.newWord(indexPath.row) {
-                    wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word)
+                    if word.newExample == nil {
+                        print("3")
+                        wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: false)
+                        self.tableView.rowHeight = 85
+                    } else {
+                        print("4")
+                        wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: true)
+                        self.tableView.rowHeight = 150
+                    }
                 }
             }
             cell = wordCell
