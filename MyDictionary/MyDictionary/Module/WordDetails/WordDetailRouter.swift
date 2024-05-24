@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import DictionaryApi
 
 enum WordDetailRoutes {
    // case details(source: WordsData?)// TODO: burada string yerine RecentWords olabilir
     case error// TODO: burada string yerine RecentWords olabilir
+    case synonym(_ text: String)
 }
 
 protocol WordDetailRouterProtocol: AnyObject{
@@ -53,6 +55,11 @@ extension WordDetailRouter: WordDetailRouterProtocol {
         case .error:
             let homeVC = HomeRouter.createModule()
             viewController?.navigationController?.pushViewController(homeVC, animated: true)
+        case .synonym(let text):
+            let detailsVC = WordDetailRouter.createModule()
+            detailsVC.searchText = text
+            word = text
+            viewController?.navigationController?.pushViewController(detailsVC, animated: true)
         }
     }
     

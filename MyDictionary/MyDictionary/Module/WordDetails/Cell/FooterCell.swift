@@ -29,31 +29,52 @@ class FooterCell: UITableViewCell {
         }
     }
     
+    var router: WordDetailRouterProtocol!
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+                
+        self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        UIView.animate(withDuration: 0.5) {
+            self.transform = CGAffineTransform.identity
+        }
     }
 
 
     
     @IBAction func sysonymButton1(_ sender: Any) {
         
+        if let text = sysonymButton1.titleLabel?.text {
+            router.navigate(.synonym(text))
+            print(text)
+        }
     }
     
     @IBAction func sysonymButton2(_ sender: Any) {
         
+        if let text = sysonymButton2.titleLabel?.text {
+            router.navigate(.synonym(text))
+        }
     }
     
     @IBAction func sysonymButton3(_ sender: Any) {
         
+        if let text = sysonymButton3.titleLabel?.text {
+            router.navigate(.synonym(text))
+        }
     }
     
     @IBAction func sysonymButton4(_ sender: Any) {
         
+        if let text = sysonymButton4.titleLabel?.text {
+            router.navigate(.synonym(text))
+        }
     }
     
     @IBAction func sysonymButton5(_ sender: Any) {
-        
+        if let text = sysonymButton5.titleLabel?.text {
+            router.navigate(.synonym(text))
+        }
     }
     
 }

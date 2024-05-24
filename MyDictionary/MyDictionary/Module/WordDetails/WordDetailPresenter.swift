@@ -23,8 +23,10 @@ protocol WordDetailPresenterProtocol: AnyObject {
     func getIsFiltering() -> Bool
     func updatedIsFiltering()
     func removeFilteredMeaning(_ text: String)
-    func getSynonyms() -> [String]?
-    func synonym(_ index: Int) -> String?
+    func getSynonyms() -> [SynonymData]?
+    func synonym(_ index: Int) -> SynonymData?
+    func topSynonymButton(_ text: String)
+    func getRouter() -> WordDetailRouterProtocol
 }
 
 final class WordDetailPresenter {
@@ -39,7 +41,8 @@ final class WordDetailPresenter {
     var newData: [NewWordData] = []
     var filteredMeanings: [NewWordData] = []
     var isFiltering: Bool = false
-    var synonyms: [String] = ["Murat", "Baran", "telefone","deli","beni"]
+    var synonyms: [SynonymData] = []
+    var topSynonyms: [SynonymData] = []
     
     
     init(
@@ -55,7 +58,11 @@ final class WordDetailPresenter {
 }
 
 extension WordDetailPresenter: WordDetailPresenterProtocol {
+    func getRouter() -> WordDetailRouterProtocol {
+        return router
+    }
     
+
     func getIsFiltering() -> Bool {
         return self.isFiltering
     }
@@ -78,7 +85,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         self.filteredMeanings = Array(Set(filteredMeanings))
         
         view.reloadData()
-      //  print("after adding \(self.filteredMeanings)")
     }
     
     func removeFilteredMeaning(_ text: String) {
@@ -87,7 +93,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
             word.newPartOfSpeech?.lowercased() == text.lowercased()
         }
         view.reloadData()
-       //print("after removing \(self.filteredMeanings)")
     }
     
     func updatedIsFiltering() {
@@ -98,7 +103,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
             self.isFiltering = false
         }
         
-       // print("Is Filtering: \(isFiltering)")
         view.reloadData()
     }
     
@@ -107,6 +111,8 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         view.setTableViewHeight()
         view.reloadData()
         fetchWordsFunc()
+        fetchSynonymFunc()
+        view.reloadData()
     }
     
     func setTitleLabels() {
@@ -123,6 +129,10 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         interactor.fetchWord()
     }
     
+    func fetchSynonymFunc() {
+        interactor.fetchSynonym()
+    }
+    
     func numberOfItems() -> Int {
         
         var sum: Int = 0
@@ -130,7 +140,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
             sum = sum + word[i].totalDefinitionsCount
             
         }
-        //print("Toplam defination sayisi: \(sum)")
         return sum
     }
     
@@ -162,14 +171,17 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         }
     }
     
-    func getSynonyms() -> [String]? {
+    func getSynonyms() -> [SynonymData]? {
         return self.synonyms
     }
     
-    func synonym(_ index: Int) -> String? {
+    func synonym(_ index: Int) -> SynonymData? {
         return self.synonyms[safe: index]
     }
     
+    func topSynonymButton(_ text: String) {
+        router.navigate(.synonym(text))
+    }
     
 }
 
@@ -187,14 +199,20 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
             DispatchQueue.main.async {
                 self.router.navigateBackWithError()
                 self.view.showNotFound()
+                print(error.localizedDescription)
                 //TODO: Fetch islemini home da yaptiktan sonra buraya tekrar bak
             }
-            
-            
-            //view.showError(error.localizedDescription)
-            // print(error.localizedDescription) // TODO:  view.showError(error.localizedDescription)
         }
-        
+    }
+    
+    func fetchSynonymOutput(result: SynonymSourcesResult) {
+        switch result {
+        case .success(let response):
+            self.synonyms = response
+            view.reloadData()
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
     }
     
     func setCellDefinitions() { // TODO: bu fonksiyonun ismini degistir.

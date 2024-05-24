@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DictionaryApi
 
 protocol FooterCellPresenterProtocol: AnyObject {
     func load()
@@ -14,11 +15,11 @@ protocol FooterCellPresenterProtocol: AnyObject {
 final class FooterCellPresenter {
     
     weak var view: FooterCellProtocol?
-    private var sysnonyms: [String]
+    private var synonyms: [SynonymData]
     
-    init(view: FooterCellProtocol? = nil, sysnonyms: [String]) {
+    init(view: FooterCellProtocol? = nil, synonyms: [SynonymData]) {
         self.view = view
-        self.sysnonyms = sysnonyms
+        self.synonyms = synonyms
     }
     
 }
@@ -27,12 +28,29 @@ extension FooterCellPresenter: FooterCellPresenterProtocol {
  
     func load() {
         
-        view?.setSysonymButton1(self.sysnonyms[0])
-        view?.setSysonymButton2(self.sysnonyms[1])
-        view?.setSysonymButton3(self.sysnonyms[2])
-        view?.setSysonymButton4(self.sysnonyms[3])
-        view?.setSysonymButton5(self.sysnonyms[4])
+        getTopScoreSynonyms()
         
+        if synonyms.count >= 5 {
+            view?.setSysonymButton1(self.synonyms[0].word ?? "")
+            view?.setSysonymButton2(self.synonyms[1].word ?? "")
+            view?.setSysonymButton3(self.synonyms[2].word ?? "")
+            view?.setSysonymButton4(self.synonyms[3].word ?? "")
+            view?.setSysonymButton5(self.synonyms[4].word ?? "")
+        }
+    
+    }
+    
+    func getTopScoreSynonyms() {
+        
+        var topSynonyms: [SynonymData]
+        
+        topSynonyms = synonyms
+            .compactMap { $0 }
+            .sorted { ($0.score ?? 0) > ($1.score ?? 0) }
+            .prefix(5)
+            .map { $0 }
+        
+        synonyms = topSynonyms
     }
     
 }

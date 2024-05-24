@@ -20,13 +20,16 @@ enum RequestMethod: String {
 enum Router {
     case word
     case pronunciation // File String de olabilir.
+    case synonym
     
     var path: String {
         switch self{
         case .word:
-            return "/api/v2/entries/en/"
+            return "https://api.dictionaryapi.dev/api/v2/entries/en/"
         case .pronunciation:
             return "/media/pronunciations/en/"
+        case .synonym:
+            return "https://api.datamuse.com/words?rel_syn="
         }
     }
     
@@ -84,8 +87,9 @@ extension API {
         headers: [String: String]? = nil,
         method: RequestMethod = .get
     ) -> URLRequest? {
-        let urlString = baseURL + word // TODO: burayi duzelt
-        //print("Url String ->  \(urlString)")
+       // let urlString = baseURL + word // TODO: burayi duzelt
+        let urlString = router.path + word // TODO: burayi duzelt
+        print("Url String ->  \(urlString)")
         guard let url = URL(string: urlString) else { return nil }
         
         var request = URLRequest(url: url)

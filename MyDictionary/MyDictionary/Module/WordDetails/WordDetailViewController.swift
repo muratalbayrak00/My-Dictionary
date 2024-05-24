@@ -158,16 +158,7 @@ class WordDetailViewController: BaseViewController {
 extension WordDetailViewController: WordDetailViewControllerProtocol {
     
     func setTableViewHeight() {
- 
- 
         self.tableView.rowHeight = UITableView.automaticDimension
-//        if let haveExample = cell?.getHaveExample(), haveExample {
-//            self.tableView.rowHeight = 150
-//        } else {
-//            self.tableView.rowHeight = 100
-//        }
-            
-       
     }
     
     func setWordTitle(_ text: String) {
@@ -231,49 +222,46 @@ extension WordDetailViewController: WordDetailViewControllerProtocol {
 extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1// Tablonuzun tek bir bölümü olacak şekilde sadece 1 döndürün
+        return 1
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if presenter.getIsFiltering() {
             //print("getFilteredMeanings Count\(presenter.getFilteredMeanings().count)")
-            return presenter.getFilteredMeanings().count+1
+            return presenter.getFilteredMeanings().count
         }
-        return presenter.numberOfItems()+1
+        return presenter.numberOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-            // Son hücre
             let footerCell = tableView.dequeueCell(with: FooterCell.self, for: indexPath)
             if let synonyms = presenter.getSynonyms() {
-                footerCell.footerCellPresenter = FooterCellPresenter(view: footerCell, sysnonyms: synonyms)
+                footerCell.footerCellPresenter = FooterCellPresenter(view: footerCell, synonyms: synonyms)
+                self.tableView.rowHeight = 150
             }
+            footerCell.router = presenter.getRouter()
             cell = footerCell
             
         } else {
-            // Diğer hücreler
             let wordCell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
             if presenter.getIsFiltering() {
                 if let filteredWord = presenter.filteredMeanings(indexPath.row) {
                     if filteredWord.newExample == nil {
-                        print("1")
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: false)
+                        self.tableView.rowHeight = 85
                     } else {
-                        print("2")
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: true)
-
+                        self.tableView.rowHeight = 150
+                        
                     }
                 }
             } else {
                 if let word = presenter.newWord(indexPath.row) {
                     if word.newExample == nil {
-                        print("3")
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: false)
                         self.tableView.rowHeight = 85
                     } else {
-                        print("4")
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: true)
                         self.tableView.rowHeight = 150
                     }
@@ -299,6 +287,11 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
         //
         //        return cell
     }
+    
+    
+    
+    
+    
     
     //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
@@ -334,3 +327,4 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
 //                cell.footerCellPresenter = FooterCellPresenter(view: cell, sysnonyms: synonyms)
 //            }
 //        }
+

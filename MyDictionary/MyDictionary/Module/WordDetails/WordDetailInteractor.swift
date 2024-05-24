@@ -10,15 +10,19 @@ import DictionaryApi
 
 
 typealias WordsSourcesResult = Result<[WordsData], NetworkError>
+typealias SynonymSourcesResult = Result<[SynonymData], NetworkError>
 
 fileprivate var wordService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
+fileprivate var synonymService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
 
 protocol WordDetailInteractorProtocol: AnyObject {
     func fetchWord()
+    func fetchSynonym()
 }
 
 protocol WordDetailInteractorOutputProtocol: AnyObject {
     func fetchWordOutput(result: WordsSourcesResult)
+    func fetchSynonymOutput(result: SynonymSourcesResult)
 }
 
 final class WordDetailInteractor {
@@ -27,11 +31,19 @@ final class WordDetailInteractor {
 }
 
 extension WordDetailInteractor: WordDetailInteractorProtocol {
-    
+
     func fetchWord() {
         wordService.fetchWords { [weak self] result in
             guard let self else { return }
             self.output?.fetchWordOutput(result: result)
         }
     }
+    
+    func fetchSynonym() {
+        synonymService.fetchSynonym { [weak self] result in
+            guard let self else { return }
+            self.output?.fetchSynonymOutput(result: result)
+        }
+    }
+    
 }

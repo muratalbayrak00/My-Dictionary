@@ -9,7 +9,7 @@ import Foundation
 import DictionaryApi
 
 enum HomeRoutes {
-   // case details(source: WordsData?)// TODO: burada string yerine RecentWords olabilir
+   // case details(source: WordsData?)
     case details(searchText: String)// TODO: burada string yerine RecentWords olabilir
 }
 
