@@ -1,0 +1,36 @@
+{
+  "partOfSpeech": "noun",
+  "definitions": [
+    {
+      "definition": "A dwelling.",
+      "synonyms": [],
+      "antonyms": []
+    },
+    {
+      "definition": "One’s native land; the place or country in which one dwells; the place where one’s ancestors dwell or dwelt.",
+      "synonyms": [],
+      "antonyms": []
+    },
+    {
+      "definition": "The locality where a thing is usually found, or was first found, or where it is naturally abundant; habitat; seat.",
+      "synonyms": [],
+      "antonyms": [],
+      "example": "the home of the pine"
+    },
+    {
+      "definition": "A focus point.",
+      "synonyms": [],
+      "antonyms": []
+    }
+  ],
+  "synonyms": [
+    "home base",
+    "abode",
+    "domicile",
+    "dwelling",
+    "house",
+    "residence",
+    "tenement"
+  ],
+  "antonyms": []
+}

@@ -8,7 +8,7 @@
 import Foundation
 import DictionaryApi
 
-enum WordDetailRoutes {
+enum WordDetailRoutes: Equatable { // Equatable for the unit tests
    // case details(source: WordsData?)// TODO: burada string yerine RecentWords olabilir
     case error// TODO: burada string yerine RecentWords olabilir
     case synonym(_ text: String)

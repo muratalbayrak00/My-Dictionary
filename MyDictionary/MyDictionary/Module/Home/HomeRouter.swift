@@ -8,7 +8,7 @@
 import Foundation
 import DictionaryApi
 
-enum HomeRoutes {
+enum HomeRoutes: Equatable {
    // case details(source: WordsData?)
     case details(searchText: String)// TODO: burada string yerine RecentWords olabilir
 }
