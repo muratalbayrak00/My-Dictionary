@@ -63,31 +63,65 @@ class WordDetailViewController: BaseViewController {
     func hiddenFilterButtons(_ wordTypes: [String]) {
         DispatchQueue.main.async {
             if !self.presenter.getWordTypes().contains(where: { $0 == "noun" }) {
+                
                 self.nounFilterButton.isHidden = true
+                
+            } else {
+                
+                self.nounFilterButton.isHidden = false
             }
             if !self.presenter.getWordTypes().contains(where: { $0 == "verb" }) {
-                
+    
                 self.verbFilterButton.isHidden = true
+                
+            } else {
+                
+                self.verbFilterButton.isHidden = false
+
             }
             if !self.presenter.getWordTypes().contains(where: { $0 == "adjective" }) {
                 
                 self.adjectiveFilterButton.isHidden = true
+                
+            } else {
+                
+                self.adjectiveFilterButton.isHidden = false
+
             }
             if !self.presenter.getWordTypes().contains(where: { $0 == "adverb" }) {
                 
                 self.adverbFilterButton.isHidden = true
+                
+            } else {
+                
+                self.adverbFilterButton.isHidden = false
+                
             }
+                
         }
         
     }
     
     @IBAction func cancelFilterButton(_ sender: Any) {
-        selectedFilterButtons.removeAll()
-        presenter.updatedIsFiltering()
-        tableView.reloadData()
-        setButtonsNonSelected()
+        clearAllFilter()
     }
     
+    func clearAllFilter() {
+        selectedFilterButtons.removeAll()
+        print(selectedFilterButtons)
+        presenter.updatedIsFiltering()
+        print(presenter.getIsFiltering())
+        setButtonsNonSelected()
+        cancelFilterButton.isHidden = true
+        setHiddenFalse()
+        hiddenFilterButtons(presenter.getWordTypes())
+        print(presenter.getWordTypes())
+        tableView.reloadData()
+    }
+    
+    func setHiddenFalse() {
+        
+    }
     func setButtonsNonSelected() {
         nounFilterButton.isSelected = false
         verbFilterButton.isSelected = false
@@ -106,8 +140,9 @@ class WordDetailViewController: BaseViewController {
             nounFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
             presenter.updatedIsFiltering()
-            tableView.reloadData()
             presenter.removeFilteredMeaning("noun")
+            clearAllFilter()
+            tableView.reloadData()
             if selectedFilterButtons.count == 0 {
                 cancelFilterButton.isHidden = true
             }
@@ -133,6 +168,7 @@ class WordDetailViewController: BaseViewController {
             selectedFilterButtons.removeLast()
             presenter.removeFilteredMeaning("verb")
             presenter.updatedIsFiltering()
+            clearAllFilter()
             tableView.reloadData()
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
@@ -158,6 +194,7 @@ class WordDetailViewController: BaseViewController {
             selectedFilterButtons.removeLast()
             presenter.removeFilteredMeaning("adjective")
             presenter.updatedIsFiltering()
+            clearAllFilter()
             tableView.reloadData()
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
@@ -178,14 +215,13 @@ class WordDetailViewController: BaseViewController {
     
     @IBAction func adverbFilterButton(_ sender: Any) {
         
-        
         if adverbFilterButton.isSelected {
             adverbFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
             presenter.updatedIsFiltering()
-            tableView.reloadData()
+            clearAllFilter()
             presenter.removeFilteredMeaning("adverb")
-            
+            tableView.reloadData()
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
