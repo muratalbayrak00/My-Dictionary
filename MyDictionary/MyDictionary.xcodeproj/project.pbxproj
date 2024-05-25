@@ -31,7 +31,6 @@
 		D6D4EA682BF802B300D1AE91 /* MyDictionary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA662BF802B300D1AE91 /* MyDictionary.xcdatamodeld */; };
 		D6D4EA6A2BF802B500D1AE91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D4EA692BF802B500D1AE91 /* Assets.xcassets */; };
 		D6D4EA6D2BF802B500D1AE91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D4EA6B2BF802B500D1AE91 /* LaunchScreen.storyboard */; };
-		D6D4EA782BF802B500D1AE91 /* MyDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA772BF802B500D1AE91 /* MyDictionaryTests.swift */; };
 		D6D4EA822BF802B500D1AE91 /* MyDictionaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA812BF802B500D1AE91 /* MyDictionaryUITests.swift */; };
 		D6D4EA842BF802B500D1AE91 /* MyDictionaryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4EA832BF802B500D1AE91 /* MyDictionaryUITestsLaunchTests.swift */; };
 		D6D4EA922BF804EA00D1AE91 /* DictionaryApi in Frameworks */ = {isa = PBXBuildFile; productRef = D6D4EA912BF804EA00D1AE91 /* DictionaryApi */; };
@@ -106,7 +105,6 @@
 		D6D4EA6C2BF802B500D1AE91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6D4EA6E2BF802B500D1AE91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6D4EA732BF802B500D1AE91 /* MyDictionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6D4EA772BF802B500D1AE91 /* MyDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDictionaryTests.swift; sourceTree = "<group>"; };
 		D6D4EA7D2BF802B500D1AE91 /* MyDictionaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyDictionaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D4EA812BF802B500D1AE91 /* MyDictionaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDictionaryUITests.swift; sourceTree = "<group>"; };
 		D6D4EA832BF802B500D1AE91 /* MyDictionaryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDictionaryUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			children = (
 				D646ACFF2C020D2E00FFE9C5 /* MockDetailPage */,
 				D646ACF62C02020A00FFE9C5 /* MockHomePage */,
-				D6D4EA772BF802B500D1AE91 /* MyDictionaryTests.swift */,
 				D646ACF42C0201BC00FFE9C5 /* Word.json */,
 				D646AD082C0216F900FFE9C5 /* Synonyms.json */,
 			);
@@ -564,7 +561,6 @@
 				D646AD072C020DA700FFE9C5 /* DetailPresenterTests.swift in Sources */,
 				D646ACFA2C02033800FFE9C5 /* MockHomeInteractor.swift in Sources */,
 				D646ACFE2C02053300FFE9C5 /* MockRouter.swift in Sources */,
-				D6D4EA782BF802B500D1AE91 /* MyDictionaryTests.swift in Sources */,
 				D646ACF82C02022200FFE9C5 /* MockHomeViewController.swift in Sources */,
 				D646ACFC2C02042800FFE9C5 /* HomePresenterTests.swift in Sources */,
 				D646AD032C020D6900FFE9C5 /* MockDetailInteractor.swift in Sources */,

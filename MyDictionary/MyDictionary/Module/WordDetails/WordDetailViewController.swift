@@ -49,6 +49,7 @@ class WordDetailViewController: BaseViewController {
         super.viewDidLoad()
         
         presenter.viewDidLoad()
+        setAccessibilityIdentifiers()
         tableView.reloadData()
         
         cancelFilterButton.isHidden = true
@@ -478,28 +479,6 @@ class WordDetailViewController: BaseViewController {
         }
         
     }
-    //    switch (selectedFilterButtons[1].lowercased(), selectedFilterButtons[2].lowercased(), selectedFilterButtons[3].lowercased()) {
-    //    case ("noun", _, _), (_, "noun", _), (_, _, "noun"):
-    //        print("noun girdi")
-    //        nounFilterButton.isHidden = true
-    //        print("noun")
-    //    case ("verb", _, _), (_, "verb", _), (_, _, "verb"):
-    //        print("verb girdi")
-    //        verbFilterButton.isHidden = true
-    //        print("verb")
-    //    case ("adjective", _, _), (_, "adjective", _), (_, _, "adjective"):
-    //        print("adjective girdi")
-    //        adjectiveFilterButton.isHidden = true
-    //        print("adjective")
-    //    case ("adverb", _, _), (_, "adverb", _), (_, _, "adverb"):
-    //        print("adverb girdi")
-    //        adverbFilterButton.isHidden = true
-    //        print("adverb")
-    //    default:
-    //        break
-    //    }
-    
-    
     
 }
 
@@ -574,7 +553,6 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if presenter.getIsFiltering() {
-            //print("getFilteredMeanings Count\(presenter.getFilteredMeanings().count)")
             return presenter.getFilteredMeanings().count+1
         }
         return presenter.numberOfItems()+1
@@ -598,14 +576,10 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
                     if filteredWord.newExample == nil || filteredWord.newExample == "" {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: false)
                         self.tableView.rowHeight = 110
-                        //  tableView.reloadRows(at: [indexPath], with: .automatic)
-                        //self.tableView.reloadData()
                     } else {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: true)
                         self.tableView.rowHeight = 130
-                        // tableView.reloadRows(at: [indexPath], with: .automatic)
                         
-                        //self.tableView.reloadData()
                     }
                 }
             } else {
@@ -613,15 +587,11 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
                     if word.newExample == nil || word.newExample == "" {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: false)
                         self.tableView.rowHeight = 110
-                        // tableView.reloadRows(at: [indexPath], with: .automatic)
                         
-                        //self.tableView.reloadData()
                     } else {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: true)
                         self.tableView.rowHeight = 130
-                        // tableView.reloadRows(at: [indexPath], with: .automatic)
                         
-                        //self.tableView.reloadData()
                     }
                 }
             }
@@ -631,58 +601,22 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
         
-        //        let cell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
-        //
-        //        if presenter.getIsFiltering() {
-        //            if let filteredWord = presenter.filteredMeanings(indexPath.row) {
-        //                cell.cellPresenter = WordCellPresenter(view: cell, word: filteredWord)
-        //            }
-        //        } else {
-        //            if let word = presenter.newWord(indexPath.row) {
-        //                cell.cellPresenter = WordCellPresenter(view: cell, word: word)
-        //            }
-        //        }
-        //
-        //        return cell
     }
     
-    
-    
-    
-    
-    
-    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    
-    //        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-    //            // Son hücreye ulaşıldığında
-    //            if let footerCell = cell as? FooterCell {
-    //                // Eğer hücre bir FooterCell ise
-    //                if let synonyms = presenter.getSynonyms() {
-    //                    // FooterCell'in içeriğini ayarlayın
-    //                    footerCell.footerCellPresenter = FooterCellPresenter(view: footerCell, sysnonyms: synonyms)
-    //                }
-    //            }
-    //        }
-    //        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-    //            // Son hücreye ulaşıldığında
-    //            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FooterCell") as? FooterCell
-    //            if let synonyms = presenter.getSynonyms() {
-    //                // FooterCell'in içeriğini ayarlayın
-    //                footerView?.footerCellPresenter = FooterCellPresenter(view: footerView, sysnonyms: synonyms)
-    //                tableView.tableFooterView = footerView
-    //            }
-    //        }
-    // }
     
 }
 
 
-//        let lastRowIndex = tableView.numberOfRows(inSection: indexPath.section) - 1
-//        if indexPath.row == lastRowIndex {
-//            let cell = tableView.dequeueCell(with: FooterCell.self, for: indexPath)
-//            print("********************************")
-//            if let synonyms = presenter.getSynonyms() {
-//                cell.footerCellPresenter = FooterCellPresenter(view: cell, sysnonyms: synonyms)
-//            }
-//        }
+extension WordDetailViewController {
+    private func setAccessibilityIdentifiers() {
+        wordTitleLabel.accessibilityIdentifier = "wordTitleLabel"
+        phoneticLabel.accessibilityIdentifier = "accessibilityIdentifier"
+        cancelFilterButton.accessibilityIdentifier = "cancelFilterButton"
+        nounFilterButton.accessibilityIdentifier = "nounFilterButton"
+        verbFilterButton.accessibilityIdentifier = "verbFilterButton"
+        adjectiveFilterButton.accessibilityIdentifier = "adjectiveFilterButton"
+        adverbFilterButton.accessibilityIdentifier = "adverbFilterButton"
+        playAudioButton.accessibilityIdentifier = "playAudioButton"
+    }
 
+}

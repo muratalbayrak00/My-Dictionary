@@ -43,13 +43,9 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        setAccessibilityIdentifiers()
         presenter.viewDidLoad()
         
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-//        tapGesture.delegate = self
-//        view.addGestureRecognizer(tapGesture)
-//        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -227,4 +223,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+}
+
+
+extension HomeViewController {
+    private func setAccessibilityIdentifiers() {
+        recentSearchLabel.accessibilityIdentifier = "recentSearchLabel"
+        clearButton.accessibilityIdentifier = "clearButton"
+        searchButton.accessibilityIdentifier = "searchButton"
+        searchBar.accessibilityIdentifier = "searchBar"
+    }
 }
