@@ -12,7 +12,7 @@ protocol HomeInteractorProtocol: AnyObject {
 }
 
 protocol HomeInteractorOutputProtocol: AnyObject {
-    func getRecentWordsOutput()
+    func getRecentWordsOutput() -> [String]
 }
 
 final class HomeInteractor {

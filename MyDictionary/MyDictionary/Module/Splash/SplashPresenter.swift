@@ -13,7 +13,7 @@ protocol SplashPresenterProtocol: AnyObject {
 
 final class SplashPresenter: SplashPresenterProtocol {
     
-    unowned var view: SplashViewControllerProtocol! // TODO: unowned ogren
+    unowned var view: SplashViewControllerProtocol! 
     let router: SplashRouterProtocol!
     let interactor: SplashInteractorProtocol!
     

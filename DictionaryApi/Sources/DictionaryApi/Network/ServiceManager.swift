@@ -7,7 +7,6 @@
 
 import Foundation
 
-//public var wordService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
 
 public protocol WordsServiceProtocol {
     func fetchWords(completion: @escaping(Result<[WordsData], NetworkError>) -> Void)

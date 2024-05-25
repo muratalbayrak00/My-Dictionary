@@ -26,7 +26,6 @@ final class HomePresenter {
     
     private var recentSearchs: [String] = []
     
-    
     init(view: HomeViewControllerProtocol, router: HomeRouterProtocol, interactor: HomeInteractorProtocol) {
         self.view = view
         self.router = router
@@ -57,7 +56,6 @@ extension HomePresenter: HomePresenterProtocol {
         view.setTitle("Search Word")
         view.setRecentLabel("Recent Search")
         setRecentSearchs()
-        getRecentWordsOutput()
         setClearButtonVisibility()
     }
     
@@ -66,20 +64,16 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     func recentWords(_ index: Int) -> String? {
-        return recentSearchs[index] // TODO: Burayi gereksiz olabilir tekrar bak.
+        return recentSearchs[index] 
     }
     
     func didSelectRowAt(_ index: Int) {
-        //print("selected recent cell \(self.recentSearchs[index])")
         let recentText = self.recentSearchs[index]
         router.navigate(.details(searchText: recentText))
     }
     
-
     private func getRecentSearchs() -> [String] {
-        // TODO: Show loading
         return self.recentSearchs
-       // interactor.getRecentSearchs()
     }
     
     func topSearchButton(_ searchText: String) {
@@ -108,13 +102,12 @@ extension HomePresenter: HomePresenterProtocol {
         }
     }
     
-    
 }
 
 extension HomePresenter: HomeInteractorOutputProtocol {
     
-    func getRecentWordsOutput() {
-        // TODO:
+    func getRecentWordsOutput() -> [String] {
+        return recentSearchs
     }
     
 }

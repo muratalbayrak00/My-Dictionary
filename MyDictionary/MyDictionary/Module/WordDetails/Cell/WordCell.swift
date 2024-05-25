@@ -8,12 +8,14 @@
 import UIKit
 
 protocol WordCellProtocol: AnyObject {
+    
     func setWordType(_ text: String)
     func setWordMeaning(_ text: String)
     func setExampleLabel(_ text: String)
     func setExampleSentence(_ text: String)
     func getHaveExample() -> Bool
     func setHiddenExample(_ status: Bool)
+    
 }
 
 class WordCell: UITableViewCell {
@@ -28,13 +30,10 @@ class WordCell: UITableViewCell {
             cellPresenter.load()
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-//        self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-//        UIView.animate(withDuration: 0.5) {
-//            self.transform = CGAffineTransform.identity
-//        }
+    
     }
     
 }
@@ -51,6 +50,7 @@ extension WordCell: WordCellProtocol {
     }
     
     func setWordType(_ text: String) {
+     
         wordTypeLabel.font = UIFont.boldSystemFont(ofSize: 19)
         wordTypeLabel.font = UIFont.italicSystemFont(ofSize: 19)
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
@@ -59,19 +59,24 @@ extension WordCell: WordCellProtocol {
     }
     
     func setWordMeaning(_ text: String) {
+    
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.wordMeaningLabel.text = capitalizedText
     }
     
     func setExampleLabel(_ text: String) {
+     
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
         self.exampleTextLabel.text = capitalizedText
 
     }
     
     func setExampleSentence(_ text: String) {
+        
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
+     
         self.exampleSentenceLabel.text = capitalizedText
+     
         if text.isEmpty {
             exampleSentenceLabel.isHidden = true
             exampleTextLabel.isHidden = true
@@ -79,6 +84,7 @@ extension WordCell: WordCellProtocol {
             exampleSentenceLabel.isHidden = false
             exampleTextLabel.isHidden = false
         }
+        
     }
     
 }

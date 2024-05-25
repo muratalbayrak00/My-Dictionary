@@ -11,31 +11,34 @@ import AVFoundation
 
 
 protocol WordDetailPresenterProtocol: AnyObject {
+    
     func viewDidLoad()
-    func viewWillAppear()
+    func playAudio()
+    func addFilteredMeaning()
+    func setIsFiltering()
+    func updatedIsFiltering()
+
     func numberOfItems() -> Int
+    func getIsFiltering() -> Bool
+    func topSynonymButton(_ text: String)
+    func removeFilteredMeaning(_ text: String)
+    func getWordTypes() -> [String]
+
     func getWord() -> [WordsData]?
     func word(_ index: Int) -> WordsData?
     func newWord(_ index: Int) -> NewWordData?
     func filteredMeanings(_ index: Int) -> NewWordData?
-    func playAudio()
     func getFilteredMeanings() -> [NewWordData]
-    func addFilteredMeaning()
-    func getIsFiltering() -> Bool
-    func setIsFiltering()
-    func getWordTypes() -> [String]
-    func updatedIsFiltering()
-    func removeFilteredMeaning(_ text: String)
     func getSynonyms() -> [SynonymData]?
     func synonym(_ index: Int) -> SynonymData?
-    func topSynonymButton(_ text: String)
     func getRouter() -> WordDetailRouterProtocol
+    
 }
 
 final class WordDetailPresenter {
     
     weak var view: WordDetailViewControllerProtocol!
-    let router: WordDetailRouterProtocol! // TODO: force ve obtional i neye gore veriyoruz
+    let router: WordDetailRouterProtocol! 
     let interactor: WordDetailInteractorProtocol!
     
     private var word: [WordsData] = []
@@ -99,7 +102,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
                 }
             }
         }
-        // pop yapmayi unutma append yapiyoruz fakat tekrar basinca pop yapmak lazim filered menaings e
         self.filteredMeanings = Array(Set(filteredMeanings))
         
         view.reloadData()
@@ -126,7 +128,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
     
     func viewDidLoad() {
         view.setupTableView()
-        view.setTableViewHeight()
         fetchWordsFunc()
         view.reloadData()
         fetchSynonymFunc()
@@ -140,19 +141,13 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
                 tempWordTypes.append(type.lowercased())
             }
         }
-       // print("tempWordTypes \(tempWordTypes)")
         self.wordTypes = Array(Set(tempWordTypes))
-        //print("wordtypes \(self.wordTypes)")
-
-    }
-    
-    func viewWillAppear() {
 
     }
     
     func setTitleLabels() {
         
-        DispatchQueue.main.async { // TODO: burayi viewWillApear a alabilirsin, asycn olmassa yoksa veriler gelmiyor
+        DispatchQueue.main.async {
             self.view.setWordTitle(self.word.first?.word ?? "error")
             self.view.setPhoneticLabel(self.word.first?.phonetic ?? "error")
         }
@@ -180,7 +175,7 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
     }
     
     func word(_ index: Int) -> DictionaryApi.WordsData? {
-        return self.word[safe: index] // TODO: ANlamadim burayi hata var tekrar bak
+        return self.word[safe: index]
     }
     
     func newWord(_ index: Int) -> NewWordData? {
@@ -199,7 +194,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         guard let phonetics = word.first?.phonetics else {
             return
         }
-        // TODO: bu kullanimin ismi ne
         if let audioUrlString = phonetics.first(where: { $0.audio != nil && !$0.audio!.isEmpty })?.audio,
            let audioUrl = URL(string: audioUrlString) {
             player = AVPlayer(url: audioUrl)
@@ -227,7 +221,7 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
         self.view.hideLoadingView()
         switch result {
         case .success(let response):
-            self.word = response // burayi duzelt json orneklerine bak green ve run birbirinden farkli
+            self.word = response
             setTitleLabels()
             setCellDefinitions()
             setFilterButtonHidden()
@@ -238,7 +232,6 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
                 self.router.navigateBackWithError()
                 self.view.showNotFound()
                 print(error.localizedDescription)
-                //TODO: Fetch islemini home da yaptiktan sonra buraya tekrar bak
             }
         }
     }
@@ -253,7 +246,7 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
         }
     }
     
-    func setCellDefinitions() { // TODO: bu fonksiyonun ismini degistir.
+    func setCellDefinitions() {
         
         for i in word {
             if let meanings = i.meanings {
@@ -267,6 +260,7 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
                 }
             }
         }
+        
     }
     
 }

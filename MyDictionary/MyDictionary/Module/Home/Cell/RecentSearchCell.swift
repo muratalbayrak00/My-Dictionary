@@ -27,8 +27,6 @@ class RecentSearchCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        // TODO: Table view yuklenirken buraya bir anamasyon gibi bir seyler ekleyebilir yukaridan asagiya sirali bir anamasyon olabilir 
     }
 
 }
@@ -36,7 +34,7 @@ class RecentSearchCell: UITableViewCell {
 extension RecentSearchCell: RecentSearchCellProtocol {
     
     func setSearchIcon(_ image: UIImage) {
-        self.searchIcon.image = image // TODO: Burayi main tread e de alabilirsin duruma gore degistirirsin
+        self.searchIcon.image = image
     }
     
     func setWordLabel(_ text: String) {

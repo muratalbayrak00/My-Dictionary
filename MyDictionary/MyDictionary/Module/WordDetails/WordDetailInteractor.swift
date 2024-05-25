@@ -10,10 +10,12 @@ import DictionaryApi
 
 
 typealias WordsSourcesResult = Result<[WordsData], NetworkError>
+
 typealias SynonymSourcesResult = Result<[SynonymData], NetworkError>
 
-fileprivate var wordService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
-fileprivate var synonymService: WordsServiceProtocol = API() // WordsServiceProtocol bunu service ten cekemiyor buna tekrar bak
+fileprivate var wordService: WordsServiceProtocol = API()
+
+fileprivate var synonymService: WordsServiceProtocol = API()
 
 protocol WordDetailInteractorProtocol: AnyObject {
     func fetchWord()

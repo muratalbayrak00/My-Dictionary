@@ -59,13 +59,8 @@ extension NetworkManager: NetworkService {
                     let responseObj = try JSONDecoder().decode(T.self, from: data)
                     completion(.success(responseObj))
                 } catch {
-                    // JSON parsing hatasını yazdır
-                     print("JSON parsing error: \(error.localizedDescription)")
-                    
-                    // JSON verisini yazdır
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        print("Received JSON: \(jsonString)")
-                    }
+                    print("JSON parsing error: \(error.localizedDescription)")
+            
                     completion(.failure(.jsonDecodedError))
                     completion(.failure(.requestFailed))
                 }

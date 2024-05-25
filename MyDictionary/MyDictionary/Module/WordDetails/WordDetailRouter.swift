@@ -9,8 +9,7 @@ import Foundation
 import DictionaryApi
 
 enum WordDetailRoutes: Equatable { // Equatable for the unit tests
-   // case details(source: WordsData?)// TODO: burada string yerine RecentWords olabilir
-    case error// TODO: burada string yerine RecentWords olabilir
+    case error
     case synonym(_ text: String)
 }
 
@@ -36,15 +35,7 @@ final class WordDetailRouter {
     }
     
     func navigateBackWithError() {
-        // Önceki view controller'a geri dön
         viewController?.navigationController?.popViewController(animated: true)
-        
-//        // Alert göstermek için DispatchQueue kullanarak biraz gecikme ekle
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            if let previousViewController = self.viewController?.navigationController?.viewControllers.last {
-//                previousViewController.showAlert(title: "Sorry", message: message)
-//            }
-//        }
     }
 }
 

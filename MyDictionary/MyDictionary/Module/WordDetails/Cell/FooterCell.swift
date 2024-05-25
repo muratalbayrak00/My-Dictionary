@@ -8,11 +8,13 @@
 import UIKit
 
 protocol FooterCellProtocol: AnyObject {
+    
     func setSysonymButton1(_ text: String)
     func setSysonymButton2(_ text: String)
     func setSysonymButton3(_ text: String)
     func setSysonymButton4(_ text: String)
     func setSysonymButton5(_ text: String)
+    
     func setHiddenButton1(_ status: Bool)
     func setHiddenButton2(_ status: Bool)
     func setHiddenButton3(_ status: Bool)
@@ -52,9 +54,9 @@ class FooterCell: UITableViewCell {
         
         if let text = sysonymButton1.titleLabel?.text {
             router.navigate(.synonym(text))
-           // print(text)
         }
     }
+    
     @IBAction func sysonymButton2(_ sender: Any) {
         
         if let text = sysonymButton2.titleLabel?.text {
@@ -127,7 +129,6 @@ extension FooterCell: FooterCellProtocol {
     }
     
     func setDisableButton1(_ status: Bool) {
-        //sysonymButton1.isEnabled = status
         sysonymButton1.isUserInteractionEnabled = status
     }
     

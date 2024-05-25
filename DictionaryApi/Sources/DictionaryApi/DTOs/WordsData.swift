@@ -12,8 +12,6 @@ public struct WordsData: Decodable {
     public let word, phonetic: String?
     public let phonetics: [Phonetic]?
     public var meanings: [Meaning]?
-    //public let license: License?
-    //public let sourceUrls: [String]?
     
     public var totalDefinitionsCount: Int {
         return meanings?.reduce(0) { $0 + ($1.definitions?.count ?? 0) } ?? 0
@@ -22,11 +20,6 @@ public struct WordsData: Decodable {
     public var combinedMeanings: [Meaning] {
         return meanings ?? []
     }
-}
-
-public struct License: Decodable {
-   // public let name: String?
-   // public let url: String?
 }
 
 public struct Meaning: Decodable {

@@ -25,7 +25,7 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint! // Button'un alt boşluğunun bir constraint'ı olmalı
+    @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint! 
     
     @IBOutlet weak var recentSearchLabel: UILabel!
     
@@ -68,7 +68,6 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
         }
         
         presenter.topSearchButton(searchText)
-        // When click the search button, clear search bar text.
         searchBar.searchTextField.text?.removeAll()
         
         reloadData()
@@ -80,7 +79,6 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //print("Search text: \(searchText)")
         if searchText.isEmpty {
             searchButton.isEnabled = false
         } else {
@@ -104,7 +102,6 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
             presenter.updateRecentWords(searchText)
         }
         presenter.topSearchButton(searchText)
-        // When click the searh button, clear search bar text.
         searchBar.searchTextField.text?.removeAll()
 
         
@@ -181,15 +178,6 @@ extension HomeViewController: HomeViewControllerProtocol {
     }
     
 }
-
-extension HomeViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        // TODO: burayi yap
-    }
-    
-}
-
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     

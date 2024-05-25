@@ -7,8 +7,6 @@
 
 import Foundation
 
-// https://api.dictionaryapi.dev/api/v2/entries/en/blue
-// https://api.dictionaryapi.dev/media/pronunciations/en/blue-au.mp3
 
 public var word: String = ""
 
@@ -19,7 +17,7 @@ enum RequestMethod: String {
 
 enum Router {
     case word
-    case pronunciation // File String de olabilir.
+    case pronunciation
     case synonym
     
     var path: String {
@@ -42,7 +40,6 @@ public class API {
         return instance
     }()
     
-    // https://api.dictionaryapi.dev/api/v2/entries/en/blue
     var baseURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
     
     private var service: NetworkService
@@ -87,9 +84,7 @@ extension API {
         headers: [String: String]? = nil,
         method: RequestMethod = .get
     ) -> URLRequest? {
-       // let urlString = baseURL + word // TODO: burayi duzelt
-        let urlString = router.path + word // TODO: burayi duzelt
-        print("Url String ->  \(urlString)")
+        let urlString = router.path + word 
         guard let url = URL(string: urlString) else { return nil }
         
         var request = URLRequest(url: url)

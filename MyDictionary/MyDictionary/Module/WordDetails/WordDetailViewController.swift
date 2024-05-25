@@ -9,7 +9,7 @@ import UIKit
 import DictionaryApi
 
 protocol WordDetailViewControllerProtocol: AnyObject {
-    func setTableViewHeight()
+    
     func setupTableView()
     func reloadData()
     func setWordTitle(_ text: String)
@@ -19,6 +19,7 @@ protocol WordDetailViewControllerProtocol: AnyObject {
     func showNotFound()
     func getSelectedFilter() -> [String]
     func hiddenFilterButtons(_ wordTypes: [String])
+    
 }
 
 class WordDetailViewController: BaseViewController {
@@ -26,9 +27,11 @@ class WordDetailViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var wordTitleLabel: UILabel!
+    
     @IBOutlet weak var phoneticLabel: UILabel!
     
     var selectedFilterButtons: [String] = []
+    
     var presenter: WordDetailPresenterProtocol!
     
     var searchText: String = ""
@@ -57,11 +60,11 @@ class WordDetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //presenter.viewWillAppear()
         
     }
     
     func hiddenFilterButtons(_ wordTypes: [String]) {
+        
         DispatchQueue.main.async {
             if !self.presenter.getWordTypes().contains(where: { $0 == "noun" }) {
                 
@@ -108,22 +111,23 @@ class WordDetailViewController: BaseViewController {
     }
     
     func clearAllFilter() {
+        
         selectedFilterButtons.removeAll()
-        print(selectedFilterButtons)
         presenter.updatedIsFiltering()
-        print(presenter.getIsFiltering())
         setButtonsNonSelected()
         cancelFilterButton.isHidden = true
         setHiddenFalse()
         hiddenFilterButtons(presenter.getWordTypes())
-        print(presenter.getWordTypes())
         tableView.reloadData()
+        
     }
     
     func setHiddenFalse() {
         
     }
+    
     func setButtonsNonSelected() {
+        
         nounFilterButton.isSelected = false
         verbFilterButton.isSelected = false
         adverbFilterButton.isSelected = false
@@ -133,24 +137,29 @@ class WordDetailViewController: BaseViewController {
         presenter.removeFilteredMeaning("verb")
         presenter.removeFilteredMeaning("adjective")
         presenter.removeFilteredMeaning("adverb")
+        
     }
     
     @IBAction func nounFilterButton(_ sender: Any) {
         
         if nounFilterButton.isSelected {
+            
             nounFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
             presenter.updatedIsFiltering()
             presenter.removeFilteredMeaning("noun")
             clearAllFilter()
             tableView.reloadData()
+            
             if selectedFilterButtons.count == 0 {
                 cancelFilterButton.isHidden = true
             }
             
         } else {
+            
             nounFilterButton.isSelected = true
             cancelFilterButton.isHidden = false
+            
             if let text = nounFilterButton.titleLabel?.text {
                 selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
@@ -164,20 +173,27 @@ class WordDetailViewController: BaseViewController {
     }
     
     @IBAction func verbFilterButton(_ sender: Any) {
+        
         if verbFilterButton.isSelected {
+            
             verbFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
             presenter.removeFilteredMeaning("verb")
             presenter.updatedIsFiltering()
             clearAllFilter()
             tableView.reloadData()
+            
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
+            
         } else {
+            
             cancelFilterButton.isHidden = false
             verbFilterButton.isSelected = true
+            
             if let text = verbFilterButton.titleLabel?.text {
+                
                 self.selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
@@ -197,13 +213,18 @@ class WordDetailViewController: BaseViewController {
             presenter.updatedIsFiltering()
             clearAllFilter()
             tableView.reloadData()
+            
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
+            
         } else {
+            
             cancelFilterButton.isHidden = false
             adjectiveFilterButton.isSelected = true
+            
             if let text = adjectiveFilterButton.titleLabel?.text {
+                
                 selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
@@ -217,19 +238,24 @@ class WordDetailViewController: BaseViewController {
     @IBAction func adverbFilterButton(_ sender: Any) {
         
         if adverbFilterButton.isSelected {
+            
             adverbFilterButton.isSelected = false
             selectedFilterButtons.removeLast()
             presenter.updatedIsFiltering()
             clearAllFilter()
             presenter.removeFilteredMeaning("adverb")
             tableView.reloadData()
+            
             if selectedFilterButtons.isEmpty {
                 cancelFilterButton.isHidden = true
             }
+            
         } else {
             cancelFilterButton.isHidden = false
             adverbFilterButton.isSelected = true
+            
             if let text = adverbFilterButton.titleLabel?.text {
+                
                 self.selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
@@ -244,21 +270,24 @@ class WordDetailViewController: BaseViewController {
         presenter.playAudio()
     }
     
-    func multiFilteringButton() { // set filter button hidden sonra cagir
+    func multiFilteringButton() {
         
         if presenter.getIsFiltering() && selectedFilterButtons.count >= 2 {
             
             switch (selectedFilterButtons[1].lowercased()) {
+                
             case "noun":
                 
-                print("noun girdi")
                 nounFilterButton.isHidden = true
                 
                 if selectedFilterButtons[0].lowercased().contains("adjective")
                         && selectedFilterButtons[0].lowercased().contains("verb")
                     && selectedFilterButtons[0].lowercased().contains("adverb") {
+                    
                     if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
+                      
                         let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
+                     
                         if type == "adjective"{
                             adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                         } else if type == "verb" {
@@ -288,28 +317,26 @@ class WordDetailViewController: BaseViewController {
                     
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Noun")
-                    print(selectedFilterButtons)
-                    print(verbFilterButton.titleLabel?.text)
-                    print(nounFilterButton.titleLabel?.text)
-                    print(selectedFilterButtons)
+             
                 } else if selectedFilterButtons[0].lowercased() == "adjective" {
                     adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / Noun"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Noun")
-                    print(selectedFilterButtons)
+               
                 } else if selectedFilterButtons[0].lowercased() == "adverb" {
                     adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Noun")
-                    print(selectedFilterButtons)
                 }
                 
             case "verb":
-                print("verb girdi")
+             
                 verbFilterButton.isHidden = true
+               
                 if selectedFilterButtons[0].lowercased().contains("noun")
                         && selectedFilterButtons[0].lowercased().contains("adjective")
                     && selectedFilterButtons[0].lowercased().contains("adverb") {
+                 
                     if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
                         let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
                         if type == "noun"{
@@ -341,31 +368,33 @@ class WordDetailViewController: BaseViewController {
                     
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Verb")
-                    print(selectedFilterButtons)
-                    print(verbFilterButton.titleLabel?.text)
-                    print(nounFilterButton.titleLabel?.text)
-                    
+                   
 
                 } else if selectedFilterButtons[0].lowercased() == "adjective" {
+             
                     adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Verb")
-                    print(selectedFilterButtons)
+             
                 } else if selectedFilterButtons[0].lowercased() == "adverb" {
+             
                     adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Verb")
-                    print(selectedFilterButtons)
                 }
                 
             case "adjective":
-                print("adjective girdi")
+         
                 adjectiveFilterButton.isHidden = true
+          
                 if selectedFilterButtons[0].lowercased().contains("noun")
                         && selectedFilterButtons[0].contains("Verb")
                     && selectedFilterButtons[0].contains("Adverb") {
+            
                     if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
+                   
                         let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
+              
                         if type == "noun"{
                             nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                         } else if type == "verb" {
@@ -395,9 +424,6 @@ class WordDetailViewController: BaseViewController {
                     
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adjective")
-                    print(selectedFilterButtons)
-                    print(verbFilterButton.titleLabel?.text)
-                    print(nounFilterButton.titleLabel?.text)
                     
                     
                 } else if selectedFilterButtons[0].lowercased() == "noun" {
@@ -405,24 +431,26 @@ class WordDetailViewController: BaseViewController {
                     nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adjective")
-                    print(selectedFilterButtons)
                     
                 } else if selectedFilterButtons[0].lowercased() == "adverb" {
                     
                     adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adjective")
-                    print(selectedFilterButtons)
                 }
                 
             case "adverb":
-                print("adverb girdi")
+           
                 adverbFilterButton.isHidden = true
+           
                 if selectedFilterButtons[0].lowercased().contains("noun")
                         && selectedFilterButtons[0].lowercased().contains("verb")
                     && selectedFilterButtons[0].lowercased().contains("adjective") {
+            
                     if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
+            
                         let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
+             
                         if type == "noun"{
                             nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                         } else if type == "verb" {
@@ -452,20 +480,18 @@ class WordDetailViewController: BaseViewController {
                     
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adverb")
-                    print(selectedFilterButtons)
-                    print(verbFilterButton.titleLabel?.text)
-                    print(nounFilterButton.titleLabel?.text)
                     
                 } else if selectedFilterButtons[0].lowercased() == "noun" {
+           
                     nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adverb")
-                    print(selectedFilterButtons)
+             
                 } else if selectedFilterButtons[0].lowercased() == "adjective" {
+              
                     adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
                     selectedFilterButtons.remove(at: 1)
                     selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adverb")
-                    print(selectedFilterButtons)
                 }
                 
             default:
@@ -483,10 +509,6 @@ class WordDetailViewController: BaseViewController {
 }
 
 extension WordDetailViewController: WordDetailViewControllerProtocol {
-    
-    func setTableViewHeight() {
-        // self.tableView.rowHeight = UITableView.automaticDimension
-    }
     
     func setWordTitle(_ text: String) {
         let capitalizedText = text.prefix(1).uppercased() + text.dropFirst()
@@ -559,36 +581,52 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
         let cell: UITableViewCell
+     
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+      
             let footerCell = tableView.dequeueCell(with: FooterCell.self, for: indexPath)
+       
             if let synonyms = presenter.getSynonyms() {
                 footerCell.footerCellPresenter = FooterCellPresenter(view: footerCell, synonyms: synonyms)
                 self.tableView.rowHeight = 150
             }
+        
             footerCell.router = presenter.getRouter()
             cell = footerCell
             
         } else {
+       
             let wordCell = tableView.dequeueCell(with: WordCell.self, for: indexPath)
+        
             if presenter.getIsFiltering() {
+       
                 if let filteredWord = presenter.filteredMeanings(indexPath.row) {
+        
                     if filteredWord.newExample == nil || filteredWord.newExample == "" {
+                   
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: false)
                         self.tableView.rowHeight = 110
+              
                     } else {
+                 
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: true)
                         self.tableView.rowHeight = 130
                         
                     }
                 }
             } else {
+           
                 if let word = presenter.newWord(indexPath.row) {
+            
                     if word.newExample == nil || word.newExample == "" {
+              
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: false)
                         self.tableView.rowHeight = 110
                         
                     } else {
+               
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: true)
                         self.tableView.rowHeight = 130
                         
@@ -608,7 +646,9 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
 
 
 extension WordDetailViewController {
+   
     private func setAccessibilityIdentifiers() {
+    
         wordTitleLabel.accessibilityIdentifier = "wordTitleLabel"
         phoneticLabel.accessibilityIdentifier = "accessibilityIdentifier"
         cancelFilterButton.accessibilityIdentifier = "cancelFilterButton"
@@ -617,6 +657,7 @@ extension WordDetailViewController {
         adjectiveFilterButton.accessibilityIdentifier = "adjectiveFilterButton"
         adverbFilterButton.accessibilityIdentifier = "adverbFilterButton"
         playAudioButton.accessibilityIdentifier = "playAudioButton"
+  
     }
 
 }

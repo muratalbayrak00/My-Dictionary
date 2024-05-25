@@ -17,7 +17,6 @@ final class WordCellPresenter {
     
     
     weak var view: WordCellProtocol?
-    //private var word: WordsData
     private var word: NewWordData
     private var haveExample: Bool
     
@@ -38,7 +37,6 @@ extension WordCellPresenter: WordCellPresenterProtocol {
     func load() {
         
         setHiddenLabel()
-        //TODO: gelen json a gore burayi duzenle
         view?.setWordType(self.word.newPartOfSpeech ?? "")
         view?.setWordMeaning(self.word.newDefinition ?? "")
         view?.setExampleSentence(self.word.newExample ?? "")

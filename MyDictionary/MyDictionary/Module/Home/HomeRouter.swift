@@ -9,8 +9,7 @@ import Foundation
 import DictionaryApi
 
 enum HomeRoutes: Equatable {
-   // case details(source: WordsData?)
-    case details(searchText: String)// TODO: burada string yerine RecentWords olabilir
+    case details(searchText: String)
 }
 
 protocol HomeRouterProtocol {
@@ -36,7 +35,6 @@ final class HomeRouter {
 }
 
 extension HomeRouter: HomeRouterProtocol {
-    // TODO: Detay sayfasini yap
     func navigate(_ route: HomeRoutes) {
         switch route {
         case .details(let text):
