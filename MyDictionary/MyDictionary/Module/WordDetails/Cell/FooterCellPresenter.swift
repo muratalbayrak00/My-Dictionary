@@ -28,7 +28,14 @@ extension FooterCellPresenter: FooterCellPresenterProtocol {
     
     func load() {
         self.getTopScoreSynonyms()
+        
         DispatchQueue.main.async {
+            
+            self.view?.setHiddenButton5(false)
+            self.view?.setHiddenButton4(false)
+            self.view?.setHiddenButton3(false)
+            self.view?.setHiddenButton2(false)
+            self.view?.setHiddenButton1(false)
             
             switch self.synonyms.count {
                 
