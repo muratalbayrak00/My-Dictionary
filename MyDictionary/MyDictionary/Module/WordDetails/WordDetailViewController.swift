@@ -52,7 +52,6 @@ class WordDetailViewController: BaseViewController {
         tableView.reloadData()
         
         cancelFilterButton.isHidden = true
-        setButtonContraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,19 +66,19 @@ class WordDetailViewController: BaseViewController {
                 self.nounFilterButton.isHidden = true
             }
             if !self.presenter.getWordTypes().contains(where: { $0 == "verb" }) {
-
+                
                 self.verbFilterButton.isHidden = true
             }
             if !self.presenter.getWordTypes().contains(where: { $0 == "adjective" }) {
-
+                
                 self.adjectiveFilterButton.isHidden = true
             }
             if !self.presenter.getWordTypes().contains(where: { $0 == "adverb" }) {
-
+                
                 self.adverbFilterButton.isHidden = true
             }
         }
-
+        
     }
     
     @IBAction func cancelFilterButton(_ sender: Any) {
@@ -120,8 +119,9 @@ class WordDetailViewController: BaseViewController {
                 selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                multiFilteringButton()
                 tableView.reloadData()
-
+                
             }
         }
         
@@ -144,6 +144,7 @@ class WordDetailViewController: BaseViewController {
                 self.selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                multiFilteringButton()
                 tableView.reloadData()
             }
         }
@@ -168,6 +169,7 @@ class WordDetailViewController: BaseViewController {
                 selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                multiFilteringButton()
                 tableView.reloadData()
             }
         }
@@ -194,6 +196,7 @@ class WordDetailViewController: BaseViewController {
                 self.selectedFilterButtons.append(text)
                 presenter.addFilteredMeaning()
                 presenter.updatedIsFiltering()
+                multiFilteringButton()
                 tableView.reloadData()
             }
         }
@@ -204,14 +207,262 @@ class WordDetailViewController: BaseViewController {
         presenter.playAudio()
     }
     
-    func setButtonContraints() {
+    func multiFilteringButton() { // set filter button hidden sonra cagir
         
-        //nounFilterButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        //button2.widthAnchor.constraint(equalToConstant: 100).isActive = true
-       // button3.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        //button4.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        if presenter.getIsFiltering() && selectedFilterButtons.count >= 2 {
+            
+            switch (selectedFilterButtons[1].lowercased()) {
+            case "noun":
+                
+                print("noun girdi")
+                nounFilterButton.isHidden = true
+                
+                if selectedFilterButtons[0].lowercased().contains("adjective")
+                        && selectedFilterButtons[0].lowercased().contains("verb")
+                    && selectedFilterButtons[0].lowercased().contains("adverb") {
+                    if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
+                        let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
+                        if type == "adjective"{
+                            adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "verb" {
+                            verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "adverb" {
+                            adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        }
+                    }
+                    
+                } else if selectedFilterButtons[0].lowercased() == "verb"
+                    || selectedFilterButtons[0].lowercased() == "adjective / verb"
+                    || selectedFilterButtons[0].lowercased() == "verb / adjective"
+                    || selectedFilterButtons[0].lowercased() == "verb / adverb"
+                    || selectedFilterButtons[0].lowercased() == "adverb / verb"
+                    || selectedFilterButtons[0].lowercased() == "adjective / adverb"
+                    || selectedFilterButtons[0].lowercased() == "adverb / adjective" {
+                    
+                    if selectedFilterButtons[0].lowercased() == "adjective / verb" || selectedFilterButtons[0].lowercased() == "adjective / adverb" {
+                        adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "verb / adjective" || selectedFilterButtons[0].lowercased() == "verb / adverb"{
+                        verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "adverb / verb" || selectedFilterButtons[0].lowercased() == "adverb / adjective" {
+                        adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else {
+                        verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    }
+                    
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Noun")
+                    print(selectedFilterButtons)
+                    print(verbFilterButton.titleLabel?.text)
+                    print(nounFilterButton.titleLabel?.text)
+                    print(selectedFilterButtons)
+                } else if selectedFilterButtons[0].lowercased() == "adjective" {
+                    adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / Noun"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Noun")
+                    print(selectedFilterButtons)
+                } else if selectedFilterButtons[0].lowercased() == "adverb" {
+                    adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Noun")
+                    print(selectedFilterButtons)
+                }
+                
+            case "verb":
+                print("verb girdi")
+                verbFilterButton.isHidden = true
+                if selectedFilterButtons[0].lowercased().contains("noun")
+                        && selectedFilterButtons[0].lowercased().contains("adjective")
+                    && selectedFilterButtons[0].lowercased().contains("adverb") {
+                    if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
+                        let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
+                        if type == "noun"{
+                            nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "adjective" {
+                            adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "adverb" {
+                            adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        }
+                    }
+                    
+                } else if selectedFilterButtons[0].lowercased() == "noun"
+                    || selectedFilterButtons[0].lowercased() == "noun / adjective"
+                    || selectedFilterButtons[0].lowercased() == "adjective / noun"
+                    || selectedFilterButtons[0].lowercased() == "adjective / adverb"
+                    || selectedFilterButtons[0].lowercased() == "adverb / adjective"
+                    || selectedFilterButtons[0].lowercased() == "noun / adverb"
+                    || selectedFilterButtons[0].lowercased() == "adverb / noun" {
+                    
+                    if selectedFilterButtons[0].lowercased() == "noun / adjective" || selectedFilterButtons[0].lowercased() == "noun / adverb" {
+                        nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "adjective / noun" || selectedFilterButtons[0].lowercased() == "adjective / adverb"{
+                        adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "adverb / adjective" || selectedFilterButtons[0].lowercased() == "adverb / noun" {
+                        adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else {
+                        nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    }
+                    
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Verb")
+                    print(selectedFilterButtons)
+                    print(verbFilterButton.titleLabel?.text)
+                    print(nounFilterButton.titleLabel?.text)
+                    
 
+                } else if selectedFilterButtons[0].lowercased() == "adjective" {
+                    adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Verb")
+                    print(selectedFilterButtons)
+                } else if selectedFilterButtons[0].lowercased() == "adverb" {
+                    adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Verb")
+                    print(selectedFilterButtons)
+                }
+                
+            case "adjective":
+                print("adjective girdi")
+                adjectiveFilterButton.isHidden = true
+                if selectedFilterButtons[0].lowercased().contains("noun")
+                        && selectedFilterButtons[0].contains("Verb")
+                    && selectedFilterButtons[0].contains("Adverb") {
+                    if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
+                        let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
+                        if type == "noun"{
+                            nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "verb" {
+                            verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "adverb" {
+                            adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        }
+                    }
+                    
+                } else if selectedFilterButtons[0].lowercased() == "verb"
+                    || selectedFilterButtons[0].lowercased() == "noun / verb"
+                    || selectedFilterButtons[0].lowercased() == "verb / noun"
+                    || selectedFilterButtons[0].lowercased() == "verb / adverb"
+                    || selectedFilterButtons[0].lowercased() == "adverb / verb"
+                    || selectedFilterButtons[0].lowercased() == "noun / adverb"
+                    || selectedFilterButtons[0].lowercased() == "adverb / noun" {
+                    
+                    if selectedFilterButtons[0].lowercased() == "noun / verb" || selectedFilterButtons[0].lowercased() == "noun / adverb" {
+                        nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "verb / noun" || selectedFilterButtons[0].lowercased() == "verb / adverb"{
+                        verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "adverb / verb" || selectedFilterButtons[0].lowercased() == "adverb / noun" {
+                        adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else {
+                        verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    }
+                    
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adjective")
+                    print(selectedFilterButtons)
+                    print(verbFilterButton.titleLabel?.text)
+                    print(nounFilterButton.titleLabel?.text)
+                    
+                    
+                } else if selectedFilterButtons[0].lowercased() == "noun" {
+                    
+                    nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adjective")
+                    print(selectedFilterButtons)
+                    
+                } else if selectedFilterButtons[0].lowercased() == "adverb" {
+                    
+                    adverbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adjective")
+                    print(selectedFilterButtons)
+                }
+                
+            case "adverb":
+                print("adverb girdi")
+                adverbFilterButton.isHidden = true
+                if selectedFilterButtons[0].lowercased().contains("noun")
+                        && selectedFilterButtons[0].lowercased().contains("verb")
+                    && selectedFilterButtons[0].lowercased().contains("adjective") {
+                    if let spaceIndex = selectedFilterButtons[0].lowercased().firstIndex(of: " ") {
+                        let type = selectedFilterButtons[0].lowercased()[..<spaceIndex]
+                        if type == "noun"{
+                            nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "verb" {
+                            verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        } else if type == "adjective" {
+                            adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                        }
+                    }
+                    
+                } else if selectedFilterButtons[0].lowercased() == "verb"
+                        || selectedFilterButtons[0].lowercased().contains("noun / verb")
+                        || selectedFilterButtons[0].lowercased().contains("verb / noun")
+                        || selectedFilterButtons[0].lowercased().contains("verb / adjective")
+                        || selectedFilterButtons[0].lowercased().contains("adjective / verb")
+                        || selectedFilterButtons[0].lowercased().contains("noun / adjective")
+                        || selectedFilterButtons[0].lowercased().contains("adjective / noun") {
+                    
+                    if selectedFilterButtons[0].lowercased() == "noun / verb" || selectedFilterButtons[0].lowercased() == "noun / adjective" {
+                        nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "verb / noun" || selectedFilterButtons[0].lowercased() == "verb / adjective"{
+                        verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else if selectedFilterButtons[0].lowercased() == "adjective / verb" || selectedFilterButtons[0].lowercased() == "adjective / noun" {
+                        adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    } else {
+                        verbFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    }
+                    
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adverb")
+                    print(selectedFilterButtons)
+                    print(verbFilterButton.titleLabel?.text)
+                    print(nounFilterButton.titleLabel?.text)
+                    
+                } else if selectedFilterButtons[0].lowercased() == "noun" {
+                    nounFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adverb")
+                    print(selectedFilterButtons)
+                } else if selectedFilterButtons[0].lowercased() == "adjective" {
+                    adjectiveFilterButton.titleLabel?.text = "\(selectedFilterButtons[0]) / \(selectedFilterButtons[1])"
+                    selectedFilterButtons.remove(at: 1)
+                    selectedFilterButtons[0] = ("\(selectedFilterButtons[0]) / Adverb")
+                    print(selectedFilterButtons)
+                }
+                
+            default:
+                break
+            }
+            
+            
+            
+        } else {
+            
+        }
+        
     }
+    //    switch (selectedFilterButtons[1].lowercased(), selectedFilterButtons[2].lowercased(), selectedFilterButtons[3].lowercased()) {
+    //    case ("noun", _, _), (_, "noun", _), (_, _, "noun"):
+    //        print("noun girdi")
+    //        nounFilterButton.isHidden = true
+    //        print("noun")
+    //    case ("verb", _, _), (_, "verb", _), (_, _, "verb"):
+    //        print("verb girdi")
+    //        verbFilterButton.isHidden = true
+    //        print("verb")
+    //    case ("adjective", _, _), (_, "adjective", _), (_, _, "adjective"):
+    //        print("adjective girdi")
+    //        adjectiveFilterButton.isHidden = true
+    //        print("adjective")
+    //    case ("adverb", _, _), (_, "adverb", _), (_, _, "adverb"):
+    //        print("adverb girdi")
+    //        adverbFilterButton.isHidden = true
+    //        print("adverb")
+    //    default:
+    //        break
+    //    }
+    
     
     
 }
@@ -219,7 +470,7 @@ class WordDetailViewController: BaseViewController {
 extension WordDetailViewController: WordDetailViewControllerProtocol {
     
     func setTableViewHeight() {
-       // self.tableView.rowHeight = UITableView.automaticDimension
+        // self.tableView.rowHeight = UITableView.automaticDimension
     }
     
     func setWordTitle(_ text: String) {
@@ -311,13 +562,13 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
                     if filteredWord.newExample == nil || filteredWord.newExample == "" {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: false)
                         self.tableView.rowHeight = 110
-                      //  tableView.reloadRows(at: [indexPath], with: .automatic)
+                        //  tableView.reloadRows(at: [indexPath], with: .automatic)
                         //self.tableView.reloadData()
                     } else {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: filteredWord, haveExample: true)
                         self.tableView.rowHeight = 130
-                       // tableView.reloadRows(at: [indexPath], with: .automatic)
-
+                        // tableView.reloadRows(at: [indexPath], with: .automatic)
+                        
                         //self.tableView.reloadData()
                     }
                 }
@@ -326,14 +577,14 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
                     if word.newExample == nil || word.newExample == "" {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: false)
                         self.tableView.rowHeight = 110
-                       // tableView.reloadRows(at: [indexPath], with: .automatic)
-
+                        // tableView.reloadRows(at: [indexPath], with: .automatic)
+                        
                         //self.tableView.reloadData()
                     } else {
                         wordCell.cellPresenter = WordCellPresenter(view: wordCell, word: word, haveExample: true)
                         self.tableView.rowHeight = 130
-                       // tableView.reloadRows(at: [indexPath], with: .automatic)
-
+                        // tableView.reloadRows(at: [indexPath], with: .automatic)
+                        
                         //self.tableView.reloadData()
                     }
                 }
