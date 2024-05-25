@@ -59,6 +59,20 @@ extension HomePresenter: HomePresenterProtocol {
         setClearButtonVisibility()
     }
     
+    func setRecentSearchs() {
+        if let savedRecentSearchs = UserDefaults.standard.array(forKey: "RecentSearchs") as? [String] {
+            self.recentSearchs = savedRecentSearchs
+
+        }
+    }
+    
+    func clearRecentSearchs() {
+        UserDefaults.standard.removeObject(forKey: "RecentSearchs")
+        self.recentSearchs = []
+        view.hideClearButton()
+    }
+
+    
     func numberOfItems() -> Int {
         return recentSearchs.count
     }
@@ -78,19 +92,6 @@ extension HomePresenter: HomePresenterProtocol {
     
     func topSearchButton(_ searchText: String) {
         router.navigate(.details(searchText: searchText))
-    }
-    
-    func setRecentSearchs() {
-        if let savedRecentSearchs = UserDefaults.standard.array(forKey: "RecentSearchs") as? [String] {
-            self.recentSearchs = savedRecentSearchs
-
-        }
-    }
-    
-    func clearRecentSearchs() {
-        UserDefaults.standard.removeObject(forKey: "RecentSearchs")
-        self.recentSearchs = []
-        view.hideClearButton()
     }
     
     func setClearButtonVisibility() {

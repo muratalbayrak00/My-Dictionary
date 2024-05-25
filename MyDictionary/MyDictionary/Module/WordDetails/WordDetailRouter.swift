@@ -36,6 +36,7 @@ final class WordDetailRouter {
     
     func navigateBackWithError() {
         viewController?.navigationController?.popViewController(animated: true)
+        viewController?.showNotFound()
     }
 }
 

@@ -48,8 +48,6 @@ class FooterCell: UITableViewCell {
         }
     }
 
-
-    
     @IBAction func sysonymButton1(_ sender: Any) {
         
         if let text = sysonymButton1.titleLabel?.text {
@@ -90,22 +88,27 @@ extension FooterCell: FooterCellProtocol {
 
     func setSysonymButton1(_ text: String) {
         sysonymButton1.titleLabel?.text = text
+        sysonymButton1.titleLabel?.textAlignment = .center
     }
     
     func setSysonymButton2(_ text: String) {
         sysonymButton2.titleLabel?.text = text
+        sysonymButton2.titleLabel?.textAlignment = .center
     }
     
     func setSysonymButton3(_ text: String) {
         sysonymButton3.titleLabel?.text = text
+        sysonymButton3.titleLabel?.textAlignment = .center
     }
     
     func setSysonymButton4(_ text: String) {
         sysonymButton4.titleLabel?.text = text
+        sysonymButton4.titleLabel?.textAlignment = .center
     }
     
     func setSysonymButton5(_ text: String) {
         sysonymButton5.titleLabel?.text = text
+        sysonymButton5.titleLabel?.textAlignment = .center
     }
     
     func setHiddenButton1(_ status: Bool) {

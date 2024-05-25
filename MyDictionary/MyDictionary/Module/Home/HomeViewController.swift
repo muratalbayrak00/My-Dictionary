@@ -17,9 +17,11 @@ protocol HomeViewControllerProtocol: AnyObject {
     func setRecentLabel(_ title: String)
     func hideClearButton()
     func showClearButton()
+
 }
 
 final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -57,7 +59,6 @@ final class HomeViewController: BaseViewController, UISearchBarDelegate, UIGestu
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
-
     
     @IBAction func topSearchButton(_ sender: UIButton) {
         
@@ -183,7 +184,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.numberOfItems()
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -211,6 +211,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+
 }
 
 

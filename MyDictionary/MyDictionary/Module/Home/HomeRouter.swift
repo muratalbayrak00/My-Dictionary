@@ -19,8 +19,7 @@ protocol HomeRouterProtocol {
 final class HomeRouter {
     
     weak var viewController: HomeViewController?
-    
-    
+        
     static func createModule() -> HomeViewController {
         let view = HomeViewController()
         let interactor = HomeInteractor()
@@ -35,6 +34,7 @@ final class HomeRouter {
 }
 
 extension HomeRouter: HomeRouterProtocol {
+    
     func navigate(_ route: HomeRoutes) {
         switch route {
         case .details(let text):

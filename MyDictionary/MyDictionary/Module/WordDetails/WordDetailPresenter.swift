@@ -44,12 +44,12 @@ final class WordDetailPresenter {
     private var word: [WordsData] = []
     private var player: AVPlayer?
     private var audioUrl: String = ""
-    var newData: [NewWordData] = []
-    var filteredMeanings: [NewWordData] = []
-    var isFiltering: Bool = false
-    var synonyms: [SynonymData] = []
-    var topSynonyms: [NewSynonymData] = []
-    var wordTypes: [String] = []
+    private var newData: [NewWordData] = []
+    private var filteredMeanings: [NewWordData] = []
+    private var isFiltering: Bool = false
+    private var synonyms: [SynonymData] = []
+    private var topSynonyms: [NewSynonymData] = []
+    private var wordTypes: [String] = []
     
     
     init(
@@ -71,7 +71,6 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         return router
     }
     
-
     func getIsFiltering() -> Bool {
         return self.isFiltering
     }
@@ -228,11 +227,13 @@ extension WordDetailPresenter: WordDetailInteractorOutputProtocol {
             view.hiddenFilterButtons(wordTypes)
             view.reloadData()
         case .failure(let error):
+
             DispatchQueue.main.async {
                 self.router.navigateBackWithError()
                 self.view.showNotFound()
                 print(error.localizedDescription)
             }
+
         }
     }
     

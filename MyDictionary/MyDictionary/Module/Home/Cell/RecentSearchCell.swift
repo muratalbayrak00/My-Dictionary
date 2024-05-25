@@ -29,6 +29,7 @@ class RecentSearchCell: UITableViewCell {
         super.awakeFromNib()
     }
 
+    
 }
 
 extension RecentSearchCell: RecentSearchCellProtocol {
