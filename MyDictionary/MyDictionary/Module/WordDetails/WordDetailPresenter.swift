@@ -33,6 +33,7 @@ protocol WordDetailPresenterProtocol: AnyObject {
     func synonym(_ index: Int) -> SynonymData?
     func getRouter() -> WordDetailRouterProtocol
     
+    func viewWillAppear()
 }
 
 final class WordDetailPresenter {
@@ -129,6 +130,11 @@ extension WordDetailPresenter: WordDetailPresenterProtocol {
         view.setupTableView()
         fetchWordsFunc()
         view.reloadData()
+        fetchSynonymFunc()
+        view.reloadData()
+    }
+    
+    func viewWillAppear() {
         fetchSynonymFunc()
         view.reloadData()
     }

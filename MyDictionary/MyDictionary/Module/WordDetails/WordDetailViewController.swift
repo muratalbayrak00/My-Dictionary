@@ -60,7 +60,7 @@ class WordDetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        presenter.viewWillAppear()
     }
     
     func hiddenFilterButtons(_ wordTypes: [String]) {
@@ -498,8 +498,6 @@ class WordDetailViewController: BaseViewController {
                 break
             }
             
-            
-            
         } else {
             
         }
@@ -573,6 +571,7 @@ extension WordDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if presenter.getIsFiltering() {
             return presenter.getFilteredMeanings().count+1
