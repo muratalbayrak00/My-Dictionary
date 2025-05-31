@@ -65,8 +65,47 @@ class WordDetailViewController: BaseViewController {
     
     func hiddenFilterButtons(_ wordTypes: [String]) {
         
+//        DispatchQueue.main.async {
+//            if !self.presenter.getWordTypes().contains(where: { $0 == "noun" }) {
+//                
+//                self.nounFilterButton.isHidden = true
+//                
+//            } else {
+//                
+//                self.nounFilterButton.isHidden = false
+//            }
+//            if !self.presenter.getWordTypes().contains(where: { $0 == "verb" }) {
+//    
+//                self.verbFilterButton.isHidden = true
+//                
+//            } else {
+//                
+//                self.verbFilterButton.isHidden = false
+//
+//            }
+//            if !self.presenter.getWordTypes().contains(where: { $0 == "adjective" }) {
+//                
+//                self.adjectiveFilterButton.isHidden = true
+//                
+//            } else {
+//                
+//                self.adjectiveFilterButton.isHidden = false
+//
+//            }
+//            if !self.presenter.getWordTypes().contains(where: { $0 == "adverb" }) {
+//                
+//                self.adverbFilterButton.isHidden = true
+//                
+//            } else {
+//                
+//                self.adverbFilterButton.isHidden = false
+//                
+//            }
+//                
+//        }
+        
         DispatchQueue.main.async {
-            if !self.presenter.getWordTypes().contains(where: { $0 == "noun" }) {
+            if !self.presenter.getWordTypes().contains(where: { $0.range(of: "noun") != nil }) {
                 
                 self.nounFilterButton.isHidden = true
                 
@@ -74,7 +113,7 @@ class WordDetailViewController: BaseViewController {
                 
                 self.nounFilterButton.isHidden = false
             }
-            if !self.presenter.getWordTypes().contains(where: { $0 == "verb" }) {
+            if !self.presenter.getWordTypes().contains(where: { $0.range(of: "verb") != nil }) {
     
                 self.verbFilterButton.isHidden = true
                 
@@ -83,7 +122,7 @@ class WordDetailViewController: BaseViewController {
                 self.verbFilterButton.isHidden = false
 
             }
-            if !self.presenter.getWordTypes().contains(where: { $0 == "adjective" }) {
+            if !self.presenter.getWordTypes().contains(where: { $0.range(of: "adjective") != nil }) {
                 
                 self.adjectiveFilterButton.isHidden = true
                 
@@ -92,7 +131,7 @@ class WordDetailViewController: BaseViewController {
                 self.adjectiveFilterButton.isHidden = false
 
             }
-            if !self.presenter.getWordTypes().contains(where: { $0 == "adverb" }) {
+            if !self.presenter.getWordTypes().contains(where: { $0.range(of: "adverb") != nil }) {
                 
                 self.adverbFilterButton.isHidden = true
                 
@@ -116,13 +155,8 @@ class WordDetailViewController: BaseViewController {
         presenter.updatedIsFiltering()
         setButtonsNonSelected()
         cancelFilterButton.isHidden = true
-        setHiddenFalse()
         hiddenFilterButtons(presenter.getWordTypes())
         tableView.reloadData()
-        
-    }
-    
-    func setHiddenFalse() {
         
     }
     

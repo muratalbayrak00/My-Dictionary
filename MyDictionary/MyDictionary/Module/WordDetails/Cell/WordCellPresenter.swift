@@ -15,7 +15,6 @@ protocol WordCellPresenterProtocol: AnyObject {
 
 final class WordCellPresenter {
     
-    
     weak var view: WordCellProtocol?
     private var word: NewWordData
     private var haveExample: Bool
